@@ -252,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          "Or continur with",
+                          "Or continue with",
                         ),
                       ),
                       Expanded(
