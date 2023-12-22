@@ -15,7 +15,9 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
+
+          child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -101,6 +103,8 @@ class _StartPageState extends State<StartPage> {
           ),
         ),
       ),
+      )
     );
+
   }
 }
