@@ -39,7 +39,7 @@ class _forgotPasswordScreenState extends State<forgotPasswordScreen> {
 
           ElevatedButton(
             child: Text(
-                "Buy now".toUpperCase(),
+                "Send E-mail".toUpperCase(),
                 style: TextStyle(fontSize: 14)
             ),
             style: ButtonStyle(
@@ -53,9 +53,14 @@ class _forgotPasswordScreenState extends State<forgotPasswordScreen> {
                 )
             ), onPressed: () {
               auth.sendPasswordResetEmail(email: emailController.text.toString()).then((value) {
-                print('We have sent you e-mail to recover password,please check your email');
+               // print('We have sent you e-mail to recover password,please check your email');
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Sending Message"),
+                ));
               }).onError((error, stackTrace){
-                print(error.toString());
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Error has been occurred"),
+                ));
               });
           },
           ),
