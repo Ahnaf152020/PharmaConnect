@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/toast.dart';
 import 'firebase.dart';
 
 class Myregister extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MyregisterState extends State<Myregister> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-
+  bool _isSigninup = false;
   @override
   void dispose(){
     _usernameController.dispose();
@@ -37,7 +38,7 @@ class _MyregisterState extends State<Myregister> {
           Container(
             padding: EdgeInsets.only(left: 35.0, top: 30.0),
             child: Text(
-              'CREATE A ACCOUNT',
+              "Let's Register Account",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
@@ -59,7 +60,7 @@ class _MyregisterState extends State<Myregister> {
                           filled: true,
                           fillColor: Colors.grey,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                              borderRadius: BorderRadius.circular(20))),
                     ),
                     SizedBox(height: 20),
                     TextField(
@@ -69,7 +70,7 @@ class _MyregisterState extends State<Myregister> {
                           filled: true,
                           fillColor: Colors.grey,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                              borderRadius: BorderRadius.circular(20))),
                     ),
                     SizedBox(height: 20),
                     TextField(
@@ -86,29 +87,12 @@ class _MyregisterState extends State<Myregister> {
                     SizedBox(height: 20),
                     TextField(
                       decoration: InputDecoration(
-                          hintText: 'Age',
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-                      decoration: InputDecoration(
-                          hintText: 'City',
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-                      decoration: InputDecoration(
                           hintText: 'Phone Number',
                           filled: true,
                           fillColor: Colors.grey,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                              borderRadius: BorderRadius.circular(20),
+                          )),
                     ),
                     SizedBox(
                       height: 40,
@@ -127,7 +111,9 @@ class _MyregisterState extends State<Myregister> {
                             )),
 
            GestureDetector(
-             onTap: _signup,
+             onTap: (){
+               _signup();
+             },
 
                child: Container(
                    decoration: BoxDecoration(
@@ -151,32 +137,24 @@ class _MyregisterState extends State<Myregister> {
 
   void _signup() async{
 
-
+    setState(() {
+      _isSigninup = true;
+    });
     String username =_usernameController.text;
     String email =_emailController.text;
     String password =_passwordController.text;
 
     User? user= await _auth.signUpWithEmailAndPassword(username,email,password);
 
+    setState(() {
+      _isSigninup = false;
+    });
     if(user!=null){
-      print("succesfully done signup");
+      showToast(message: "succesfully done signup");
     Navigator.pushNamed(context, 'widget');
 
     }else{
-      print("error occured finish");
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: Colors.lightBlueAccent,
-            content: Text(
-              'error occured',
-              style: TextStyle(color: Colors.white),
-            ),
-          );
-        },
-      );
-
+      showToast(message: "error occured in signup");
     }
 
   }

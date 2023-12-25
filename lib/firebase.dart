@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pharmaconnectbyturjo/toast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 class FirebaseAuthService{
   final FirebaseAuth _auth =FirebaseAuth.instance;
 
@@ -13,7 +14,7 @@ class FirebaseAuthService{
     }  on FirebaseAuthException catch(e){
 
         if(e.code == 'email-already-in-use'){
-          print('The e-mail address is already in use');
+        print('The e-mail address is already in use');
 
         }else{
           print('An error occurred :${e.code}');
@@ -32,9 +33,9 @@ class FirebaseAuthService{
     } on FirebaseAuthException catch(e){
 
       if(e.code == 'user-not-found' || e.code =='wrong password'){
-        print('Invalid e-mail or password');
+        showToast(message: "Invalid e-mail or password");
       }else{
-        print('An error occured: ${e.code}');
+        showToast(message: 'An error occured: ${e.code}');
       }
 
     }
@@ -45,9 +46,9 @@ class FirebaseAuthService{
      _auth.sendPasswordResetEmail(email: email).then((value) {
        var Get;
        Get.back();
-       print('Email Sent, We have sent password reset email');
+       showToast(message: 'Email Sent, We have sent password reset email');
      }).catchError((e) {
-       print("Error in sending password reset email is $e");
+       showToast(message: "Error in sending password reset email is $e");
      });
    }
 }

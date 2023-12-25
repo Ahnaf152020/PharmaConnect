@@ -5,6 +5,7 @@ import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart' ;
 
 import 'package:google_sign_in/google_sign_in.dart';
 import "package:iconsax/iconsax.dart";
+import 'package:pharmaconnectbyturjo/toast.dart';
 import 'package:pharmaconnectbyturjo/widget.dart';
 
 import '../firebase.dart';
@@ -19,7 +20,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isSigning =false;
-   FirebaseAuthService _auth = FirebaseAuthService();
+  final FirebaseAuthService _auth = FirebaseAuthService();
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -299,7 +300,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        _signInWithGoogle();
+
                       },
                       child: Container(
                         width: 30,
@@ -374,23 +375,11 @@ class _LoginPageState extends State<LoginPage> {
       _isSigning =false;
     });
     if(user!=null){
-      print("succesfully done signin");
+      showToast(message: "succesfully done signin");
       Navigator.pushNamed(context, 'widget');
 
     }else{
-      print("error occured in signin");
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: Colors.lightBlueAccent,
-            content: Text(
-              'error occured in signin',
-              style: TextStyle(color: Colors.white),
-            ),
-          );
-        },
-      );
+      showToast(message: "error occured in signin");
 
     }
 
@@ -399,41 +388,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-  _signInWithGoogle()async{
 
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-
-    try{
-      final GoogleSignInAccount ? googleSignInAccount = await _googleSignIn.signIn();
-
-      if(googleSignInAccount != null){
-
-        final GoogleSignInAuthentication googleSignInAuthentication =await
-            googleSignInAccount.authentication;
-
-        final  AuthCredential credential =GoogleAuthProvider.credential(
-
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken,
-        );
-
-       //await _firebaseAuth.signInWithCredential(credential);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Mywidget()),
-        );
-      }
-
-    }catch(e){
-  print("Some error Occured $e");
-
-    }
-
-
-
-  }
 
 
 
