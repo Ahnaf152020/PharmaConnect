@@ -3,137 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
 import 'firebase.dart';
 
-/*class Myregister extends StatefulWidget {
-  const Myregister({Key? key}) : super(key: key);
-
-  @override
-  State<Myregister> createState() => _MyregisterState();
-}
-
-class _MyregisterState extends State<Myregister> {
-
-  final FirebaseAuthService _auth = FirebaseAuthService();
-
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
-  bool _isSigninup = false;
-  @override
-  void dispose(){
-    _usernameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/register.png'), fit: BoxFit.cover)),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(children: [
-          Container(
-            padding: EdgeInsets.only(left: 35.0, top: 30.0),
-            child: Text(
-              "Let's Register Account",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.2,
-                    left: 30,
-                    right: 35),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: _usernameController,
-                      decoration: InputDecoration(
-                          hintText: 'Full Name',
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                          hintText: 'E-mail',
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-
-                controller: _passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText: 'Password',
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-                      decoration: InputDecoration(
-                          hintText: 'Phone Number',
-                          filled: true,
-                          fillColor: Colors.grey,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Colors.cyanAccent,
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, 'LoginPage');
-                              },
-                              icon: Icon(Icons.arrow_back),
-                            )),
-
-           GestureDetector(
-             onTap: (){
-               _signup();
-             },
-
-               child: Container(
-                   decoration: BoxDecoration(
-                     color: Colors.black,
-                     borderRadius: BorderRadius.circular(30.0),
-                   ),padding: const EdgeInsets.all(25),
-                 child:Text('Sign up',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),)
-                     ),
-             ),
-
-
-                      ],
-                    ),
-                  ],
-                )),
-          )
-        ]),
-      ),
-    );
-  }*/
 class Myregister extends StatefulWidget {
   const Myregister({super.key});
 
@@ -153,6 +22,19 @@ class _RegisterPageState extends State<Myregister> {
   TextEditingController _passwordController = TextEditingController();
 
   bool _isSigninup = false;
+  final emailFocusNode  = FocusNode();
+  final passwordFocusNode  = FocusNode();
+
+
+
+  var _isObscured;
+
+  void initState(){
+
+    _isObscured =true;
+
+  }
+
   @override
   void dispose(){
     _usernameController.dispose();
@@ -229,7 +111,7 @@ class _RegisterPageState extends State<Myregister> {
                 children: [
                   TextField(
                     controller: _usernameController,
-                    obscureText: true,
+
                     decoration: InputDecoration(
                         fillColor: Colors.black,
                         labelText: 'Name',labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -244,18 +126,41 @@ class _RegisterPageState extends State<Myregister> {
                         fillColor: Colors.black,
                         labelText: 'Email',labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                         hintText: 'Enter Your Email'),
-                    keyboardType: TextInputType.phone,
+                   // keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.next,
                   ),
                   TextField(
+                    obscureText: _isObscured,
+                    focusNode: passwordFocusNode,
+                    //keyboardType: TextInputType.emailAddress,
                     controller: _passwordController,
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        padding: const EdgeInsetsDirectional.only( end :12.0),
+                        icon: _isObscured ? const Icon (Icons.visibility): const Icon(Icons.visibility_off),
+                  onPressed: (){
+                          setState(() {
+                            _isObscured   = !_isObscured;
+                          });
+                  },),
                         fillColor: Colors.black,
-                        icon: new Icon(Icons.lock),
+                        //icon: new Icon(Icons.lock),
                         labelText: 'Password',labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                        hintText: 'Enter Your Password'),
-                   // keyboardType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
+                        icon: new Icon(Icons.lock),
+                        hintText: 'Enter Your Password',
+                    ),
+                        /*validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            passwordFocusNode.requestFocus();
+                            return 'please enter some text';
+                          }
+                          if (value.length < 6) {
+                            passwordFocusNode.requestFocus();
+                            return 'Password must be at least 6 characters';
+                          }
+                        },*/
+
+
                   ),
                 ],
               ),
