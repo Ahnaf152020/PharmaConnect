@@ -21,11 +21,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _isSigning =false;
   final FirebaseAuthService _auth = FirebaseAuthService();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController forgetEmailController = TextEditingController();
-
+  final emailFocusNode  = FocusNode();
+  final passwordFocusNode  = FocusNode();
+var _isObscured;
   @override
   void dispose(){
     _emailController.dispose();
@@ -43,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         if (activeIndex == 5) activeIndex = 0;
       });
     });
+    _isObscured=true;
 
     super.initState();
   }
@@ -68,14 +72,15 @@ class _LoginPageState extends State<LoginPage> {
                       right: 0,
                       bottom: 0,
                       child: AnimatedOpacity(
-                        opacity: activeIndex == 0 ? 1 : 0,
+                        opacity: activeIndex == 1 ? 1 : 0,
                         duration: Duration(
-                          seconds: 2,
+                          seconds: 3,
                         ),
                         curve: Curves.linear,
                         child: Image.asset(
-                          "assets/images/image1.png",
+                          "assets/images/PharmaConnectlogo.jpg",
                           height: 400,
+                          width: 400,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -87,26 +92,11 @@ class _LoginPageState extends State<LoginPage> {
                       bottom: 0,
                       child: AnimatedOpacity(
                         opacity: activeIndex == 1 ? 1 : 0,
-                        duration: Duration(seconds: 2),
+                        duration: Duration(
+                          seconds: 2,),
                         curve: Curves.linear,
                         child: Image.asset(
-                          "assets/images/image2.png",
-                          height: 400,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: AnimatedOpacity(
-                        opacity: activeIndex == 2 ? 1 : 0,
-                        duration: Duration(seconds: 2),
-                        curve: Curves.linear,
-                        child: Image.asset(
-                          "assets/images/image3.png",
+                          "assets/images/image1.png",
                           height: 400,
                           fit: BoxFit.cover,
                         ),
@@ -122,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                         duration: Duration(seconds: 2),
                         curve: Curves.linear,
                         child: Image.asset(
-                          "assets/images/image4.png",
+                          "assets/images/image2.png",
                           height: 400,
                           fit: BoxFit.cover,
                         ),
@@ -135,6 +125,39 @@ class _LoginPageState extends State<LoginPage> {
                       bottom: 0,
                       child: AnimatedOpacity(
                         opacity: activeIndex == 4 ? 1 : 0,
+                        duration: Duration(seconds: 2),
+                        curve: Curves.linear,
+                        child: Image.asset(
+                          "assets/images/image3.png",
+                          height: 400,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: AnimatedOpacity(
+                        opacity: activeIndex == 4 ? 1 : 0,
+                        duration: Duration(seconds: 2),
+                        curve: Curves.linear,
+                        child: Image.asset(
+                          "assets/images/image4.png",
+                          height: 400,
+
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: AnimatedOpacity(
+                        opacity: activeIndex == 5 ? 1 : 0,
                         duration: Duration(seconds: 2),
                         curve: Curves.linear,
                         child: Image.asset(
@@ -189,10 +212,21 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 TextField(
+
+                  focusNode: passwordFocusNode,
                   controller: _passwordController,
                   cursorColor: Colors.black,
-                  obscureText: true,
+                  obscureText: _isObscured,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      padding: const EdgeInsetsDirectional.only( end :12.0),
+                      icon: _isObscured ? const Icon (Icons.visibility): const Icon(Icons.visibility_off),
+                      onPressed: (){
+                        setState(() {
+                          _isObscured   = !_isObscured;
+                        });
+                      },),
+
                     contentPadding: EdgeInsets.all(0.0),
                     labelText: 'Password',
                     hintText: 'Password',
@@ -301,6 +335,8 @@ class _LoginPageState extends State<LoginPage> {
                     GestureDetector(
                       onTap: () {
 
+
+                        _signInWithGoogle();
                       },
                       child: Container(
                         width: 30,
@@ -384,12 +420,42 @@ class _LoginPageState extends State<LoginPage> {
     }
 
   }
+  _signInWithGoogle()async{
+
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+      if(googleSignInAccount != null ){
+        final GoogleSignInAuthentication googleSignInAuthentication = await
+        googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+
+        await _firebaseAuth.signInWithCredential(credential);
+        Navigator.pushNamed(context, "widget");
+      }
+
+    }catch(e) {
+      showToast(message: "some error occured $e");
+    }
 
 
-
-
-
-
+  }
 
 
 }
+
+
+
+
+
+
+
+
+
