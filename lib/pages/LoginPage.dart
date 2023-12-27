@@ -72,7 +72,7 @@ var _isObscured;
                       right: 0,
                       bottom: 0,
                       child: AnimatedOpacity(
-                        opacity: activeIndex == 1 ? 1 : 0,
+                        opacity: activeIndex == 0? 1 : 0,
                         duration: Duration(
                           seconds: 3,
                         ),
@@ -108,7 +108,7 @@ var _isObscured;
                       right: 0,
                       bottom: 0,
                       child: AnimatedOpacity(
-                        opacity: activeIndex == 3 ? 1 : 0,
+                        opacity: activeIndex == 2 ? 1 : 0,
                         duration: Duration(seconds: 2),
                         curve: Curves.linear,
                         child: Image.asset(
@@ -124,7 +124,7 @@ var _isObscured;
                       right: 0,
                       bottom: 0,
                       child: AnimatedOpacity(
-                        opacity: activeIndex == 4 ? 1 : 0,
+                        opacity: activeIndex == 3 ? 1 : 0,
                         duration: Duration(seconds: 2),
                         curve: Curves.linear,
                         child: Image.asset(
