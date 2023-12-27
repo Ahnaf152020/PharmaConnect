@@ -14,11 +14,12 @@ class FirebaseAuthService{
     }  on FirebaseAuthException catch(e){
 
         if(e.code == 'email-already-in-use'){
-        print('The e-mail address is already in use');
+        showToast(message: 'The e-mail address is already in use');
 
-        }else{
-          print('An error occurred :${e.code}');
+        }else {
+          showToast(message: 'An error occurred :${e.code}');
         }
+
       }
 
 

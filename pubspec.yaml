@@ -45,6 +45,8 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   google_sign_in: ^6.1.5
   fluttertoast: ^8.2.4
+  # add this line to your dependencies
+
 
 
 dev_dependencies:
