@@ -1,6 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/chatsearchpage.dart';
+import 'package:pharmaconnectbyturjo/pages/LoginPage.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
+import 'package:provider/provider.dart';
 
+import 'firebase.dart';
+
+final FirebaseAuth _auth=FirebaseAuth.instance;
 class Mywidget extends StatefulWidget {
   const Mywidget({Key? key}) : super(key: key);
 
@@ -32,10 +39,13 @@ class _MywidgetState extends State<Mywidget> {
                 child: Center(
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'LoginPage');
-                          showToast(message: 'you are succesfully logout');
+                          Navigator.push(
+                            context,
+                       MaterialPageRoute(
+                           builder: (context) => chatpage()),
+                             );
                         },
-                        child: Text('GO HOME'))),
+                        child: Text('Chat Room'))),
               )
             ],
           )

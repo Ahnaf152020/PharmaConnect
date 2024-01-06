@@ -49,6 +49,10 @@ dependencies:
   permission_handler: ^11.1.0
   flutter_local_notifications: ^16.3.0
   rxdart: ^0.27.7
+  firebase_storage: ^11.5.6
+  image_picker: ^1.0.6
+  uuid: ^4.2.1
+
   # add this line to your dependencies
 
 

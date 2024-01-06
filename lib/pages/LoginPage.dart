@@ -410,13 +410,16 @@ var _isObscured;
     setState(() {
       _isSigning =false;
     });
-    if(user!=null){
-      showToast(message: "succesfully done signin");
-      Navigator.pushNamed(context, 'widget');
-
-    }else{
-      showToast(message: "error occured in signin");
-
+    if(_emailController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
+      if (user != null) {
+        showToast(message: "succesfully done signin");
+        Navigator.pushNamed(context, 'widget');
+      } else {
+        showToast(message: "error occured in signin");
+      }
+    }
+    else{
+      showToast(message: "Please enter the field");
     }
 
   }

@@ -236,24 +236,37 @@ class _RegisterPageState extends State<Myregister> {
     setState(() {
       _isSigninup = false;
     });
-    if(user!=null){
-      showToast(message: "succesfully done signup");
-      addUserDetails(
-        _usernameController.text.trim(),
-      );
-      Navigator.pushNamed(context, 'widget');
 
-    }else{
-      showToast(message: "error occured in signup");
+    if(_usernameController.text.isNotEmpty && _passwordController.text.isNotEmpty && _emailController.text.isNotEmpty) {
+      if (user != null) {
+        showToast(message: "successfully done signup");
+
+
+       /*addUserDetails(
+          _usernameController.text.trim(),
+          _emailController.text.trim(), //(2)
+        );*/
+        Navigator.pushNamed(context, 'widget');
+      } else {
+        showToast(message: "error occured in signup");
+      }
+    }
+    else{
+      showToast(message: "Please Enter the fields");
     }
 
   }
 
-  Future addUserDetails(String username) async{
+
+//adding new widget mean name,password and email code (2)
+ /*Future addUserDetails(String username,String email) async{
     await FirebaseFirestore.instance.collection('users').add({
       'user name': username,
+      'e-mail': email,
+      'status': "unavailable",
     });
   }
+  */
 
 
 
