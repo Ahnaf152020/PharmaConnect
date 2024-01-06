@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart' ;
 
@@ -20,6 +21,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isSigning =false;
+  bool  isLogging=false;
   final FirebaseAuthService _auth = FirebaseAuthService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -28,6 +30,16 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController forgetEmailController = TextEditingController();
   final emailFocusNode  = FocusNode();
   final passwordFocusNode  = FocusNode();
+var auth=FirebaseAuth.instance;
+  checkIfLogin() async{
+  auth.authStateChanges().listen((User ? user ) {
+    if(user!= null && mounted){
+      setState(() {
+       isLogging=true;
+      });
+    }
+  });
+  }
 var _isObscured;
   @override
   void dispose(){
@@ -39,6 +51,7 @@ var _isObscured;
 
   @override
   void initState() {
+
     Timer.periodic(const Duration(seconds: 2), (timer) {
       setState(() {
         activeIndex++;
@@ -47,9 +60,15 @@ var _isObscured;
       });
     });
     _isObscured=true;
-
+    checkIfLogin();
+    super.initState();
     super.initState();
   }
+
+  /*void initStatee(){
+    checkIfLogin();
+    super.initState();
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -295,6 +314,7 @@ var _isObscured;
                       color: Colors.grey[200],
                     ),
                     child: Center(child: _isSigning ? CircularProgressIndicator(color: Colors.green,) :Text("Login",style: TextStyle(color: Colors.black),),),
+
                   ),
                 ),
 
@@ -400,6 +420,7 @@ var _isObscured;
   void _signIn() async{
 
     setState(() {
+
       _isSigning = true;
     });
     String email =_emailController.text;
@@ -447,6 +468,8 @@ var _isObscured;
 
 
   }
+
+
 
 
 }

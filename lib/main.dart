@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart';
 import 'package:pharmaconnectbyturjo/pages/LoginPage.dart';
+import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
+import 'package:pharmaconnectbyturjo/pages/edit_screen.dart';
+import 'package:pharmaconnectbyturjo/pages/forward_button.dart';
+import 'package:pharmaconnectbyturjo/pages/setting_switch.dart';
 import 'package:pharmaconnectbyturjo/pages/startPage.dart';
 import 'package:pharmaconnectbyturjo/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,14 +28,18 @@ void main() async{
   : await Firebase.initializeApp();
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: StartPage(),
+      home:
+
+      StartPage(),
     initialRoute: 'StartPage',
     routes: {
       'Startpage': (context) => StartPage(),
       'LoginPage': (context) => LoginPage(),
       'register': (context) => Myregister(),
      'forgotpassword': (context) => forgotPasswordScreen(),
-      'widget': (context) => Mywidget()
+      'Update_Profile': (context) => AccountScreen(),
+      'widget': (context) => Mywidget(),
+      'edit_screen': (context) =>   EditAccountScreen(),
 
     },
 
