@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/chatsearchpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,13 +50,26 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     width: 20,
                   ),
-                  Container(
-                    child: Image.asset(
-                      "assets/icon/chat.png",
-                      height: 30,
-                      fit: BoxFit.cover,
+
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => chatpage()),
+                      );
+                    },
+                    child: Container(
+                      child: Image.asset(
+                        "assets/icon/chat.png",
+                        height: 30,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
+                  )
+
+
+
 
                 ]),
               ),
