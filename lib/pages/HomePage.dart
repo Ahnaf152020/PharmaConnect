@@ -216,6 +216,17 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              SizedBox(height: 20,),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Popular Products",
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+
+                  ]),
               PopularProduct(),
             ],
           ),
