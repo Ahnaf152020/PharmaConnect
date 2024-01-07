@@ -10,6 +10,7 @@ import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart';
 import 'package:pharmaconnectbyturjo/pages/LoginPage.dart';
 import 'package:pharmaconnectbyturjo/pages/startPage.dart';
 import 'package:pharmaconnectbyturjo/register.dart';
+import 'package:pharmaconnectbyturjo/pages/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pharmaconnectbyturjo/widget.dart';
@@ -33,8 +34,9 @@ void main() async{
       'Startpage': (context) => StartPage(),
       'LoginPage': (context) => LoginPage(),
       'register': (context) => Myregister(),
-     'forgotpassword': (context) => forgotPasswordScreen(),
-      'widget': (context) => Mywidget(),
+      'forgotpassword': (context) => forgotPasswordScreen(),
+      //'widget': (context) => Mywidget(),
+      'HomePage': (context) => HomePage(),
       'chatsearchpage': (context) => chatpage(),
 
     },
