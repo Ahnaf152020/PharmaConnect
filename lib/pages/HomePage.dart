@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -51,11 +50,16 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     width: 20,
                   ),
-                  Container(
-                    child: Image.asset(
-                      "assets/icon/chat.png",
-                      height: 30,
-                      fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'chatsearchpage');
+                    },
+                    child: Container(
+                      child: Image.asset(
+                        "assets/icon/chat.png",
+                        height: 30,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ]),
