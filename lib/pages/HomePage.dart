@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pharmaconnectbyturjo/chatsearchpage.dart';
+import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 20,
                   ),
                   Container(
                     child: Image.asset(
@@ -50,180 +51,16 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     width: 20,
                   ),
-
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => chatpage()),
-                      );
-                    },
-                    child: Container(
-                      child: Image.asset(
-                        "assets/icon/chat.png",
-                        height: 30,
-                        fit: BoxFit.cover,
-                      ),
+                  Container(
+                    child: Image.asset(
+                      "assets/icon/chat.png",
+                      height: 30,
+                      fit: BoxFit.cover,
                     ),
-                  )
-
-
-
-
+                  ),
                 ]),
               ),
               const SizedBox(
-                height: 20,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Product Catagories",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      // Text(
-                      //   "See More",
-                      //   style: TextStyle(
-                      //       fontSize: 15,
-                      //       color: Colors.blueAccent,
-                      //       fontWeight: FontWeight.bold),
-                      // )
-                    ]),
-              ),
-              SizedBox(height: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFECDF),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset("assets/icon/PersonalHygine.png"),
-                        ),
-                        const SizedBox(height: 4),
-                        Text("Personal\nCare", textAlign: TextAlign.center)
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFECDF),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset("assets/icon/BabyCare.png"),
-                        ),
-                        const SizedBox(height: 4),
-                        Text("Baby\nCare", textAlign: TextAlign.center)
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFECDF),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset("assets/icon/SurgicalProduct.png"),
-                        ),
-                        const SizedBox(height: 4),
-                        Text("Surgical\nProduct", textAlign: TextAlign.center)
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFECDF),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset("assets/icon/WomenCare.png"),
-                        ),
-                        const SizedBox(height: 4),
-                        Text("Women \nCare", textAlign: TextAlign.center)
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFECDF),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset("assets/icon/floss.png"),
-                        ),
-                        const SizedBox(height: 4),
-                        Text("Detal\nCare", textAlign: TextAlign.center)
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFECDF),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset("assets/icon/More.png"),
-                        ),
-                        const SizedBox(height: 4),
-                        Text("More\n", textAlign: TextAlign.center)
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
                 height: 20,
               ),
               const Padding(
@@ -245,6 +82,137 @@ class _HomePageState extends State<HomePage> {
                       )
                     ]),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFECDF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.asset("assets/icon/PersonalHygine.png"),
+                        ),
+                        const SizedBox(height: 4),
+                        Text("Personal\nCare", textAlign: TextAlign.center)
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFECDF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.asset("assets/icon/BabyCare.png"),
+                        ),
+                        const SizedBox(height: 4),
+                        Text("Baby\nCare", textAlign: TextAlign.center)
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFECDF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.asset("assets/icon/SurgicalProduct.png"),
+                        ),
+                        const SizedBox(height: 4),
+                        Text("Surgical\nProduct", textAlign: TextAlign.center)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFECDF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.asset("assets/icon/WomenCare.png"),
+                        ),
+                        const SizedBox(height: 4),
+                        Text("Women \nCare", textAlign: TextAlign.center)
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFECDF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.asset("assets/icon/floss.png"),
+                        ),
+                        const SizedBox(height: 4),
+                        Text("Detal\nCare", textAlign: TextAlign.center)
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFECDF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.asset("assets/icon/More.png"),
+                        ),
+                        const SizedBox(height: 4),
+                        Text("More\n", textAlign: TextAlign.center)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              PopularProduct(),
             ],
           ),
         ),
