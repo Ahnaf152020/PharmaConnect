@@ -283,8 +283,22 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 20,
               ),
+
               GestureDetector(
-                onTap: _signIn,
+                onTap: (){
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.orange,
+                        ),
+                      );
+                    },
+                  );
+                  _signIn();
+
+                  },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Container(
@@ -398,6 +412,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _signIn() async {
+
     setState(() {
       _isSigning = true;
     });
@@ -412,7 +427,10 @@ class _LoginPageState extends State<LoginPage> {
     if (_emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty) {
       if (user != null) {
+
         showToast(message: "succesfully done signin");
+
+
         Navigator.pushNamed(context, 'HomePage');
       } else {
         showToast(message: "error occured in signin");

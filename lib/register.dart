@@ -184,11 +184,11 @@ class _RegisterPageState extends State<Myregister> {
                 ),
                 onPressed: () {
                   _signup();
-                  CircularProgressIndicator();
                 },
                 child: Text('Register'),
               ),
             ),
+
             SizedBox(
               height: 50,
             ),
@@ -218,12 +218,15 @@ class _RegisterPageState extends State<Myregister> {
           ],
         ),
       ),
+
     );
   }
 
 
 
   void _signup() async{
+
+
 
     setState(() {
       _isSigninup = true;
@@ -242,7 +245,6 @@ class _RegisterPageState extends State<Myregister> {
       if (user != null) {
         showToast(message: "successfully done signup");
 
-
        /*addUserDetails(
           _usernameController.text.trim(),
           _emailController.text.trim(), //(2)
@@ -255,6 +257,7 @@ class _RegisterPageState extends State<Myregister> {
     else{
       showToast(message: "Please Enter the fields");
     }
+
 
   }
 
