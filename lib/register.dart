@@ -183,6 +183,17 @@ class _RegisterPageState extends State<Myregister> {
                   minimumSize: Size(70, 50), //////// HERE
                 ),
                 onPressed: () {
+
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.orange,
+                        ),
+                      );
+                    },
+                  );
                   _signup();
                 },
                 child: Text('Register'),
