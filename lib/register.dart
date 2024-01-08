@@ -184,6 +184,7 @@ class _RegisterPageState extends State<Myregister> {
                 ),
                 onPressed: () {
                   _signup();
+                  CircularProgressIndicator();
                 },
                 child: Text('Register'),
               ),
@@ -246,7 +247,7 @@ class _RegisterPageState extends State<Myregister> {
           _usernameController.text.trim(),
           _emailController.text.trim(), //(2)
         );*/
-        Navigator.pushNamed(context, 'widget');
+        Navigator.pushNamed(context, 'HomePage');
       } else {
         showToast(message: "error occured in signup");
       }

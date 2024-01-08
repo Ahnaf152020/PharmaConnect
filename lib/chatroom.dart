@@ -203,6 +203,8 @@ class ChatRoom extends StatelessWidget {
     );
   }
 
+  //message konta kon side e ase esob dekhar duty hocche e widget er kaj
+
   Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
     return map['type'] == "text"
         ? Container(
@@ -263,6 +265,8 @@ class ChatRoom extends StatelessWidget {
   }
 }
 
+
+//showimage in chat
 class ShowImage extends StatelessWidget {
   final String imageUrl;
 
