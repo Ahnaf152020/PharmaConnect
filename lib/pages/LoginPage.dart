@@ -52,6 +52,8 @@ class _LoginPageState extends State<LoginPage> {
 
     super.initState();
   }
+  @override
+
 
   @override
   Widget build(BuildContext context) {
@@ -357,31 +359,36 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 15,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+
                   GestureDetector(
                     onTap: () {
                       _signInWithGoogle();
                     },
                     child: Container(
-                      width: 30,
-                      height: 30,
+                      width: double.infinity,
+                      height: 45,
                       decoration: BoxDecoration(
+                        color: Colors.red,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.white),
-                          image: const DecorationImage(
-                            image: AssetImage("assets/images/google.png"),
-                            fit: BoxFit.cover,
+
                           ),
-                          color: Colors.grey[200]),
+                          child: Center(
+                          child: _isSigning ? CircularProgressIndicator(
+                            color: Colors.white,):Text(
+                            "Sign In With Google",
+
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
+                    ),
+
+
+
+              SizedBox( height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
