@@ -206,63 +206,99 @@ class ChatRoom extends StatelessWidget {
   //message konta kon side e ase esob dekhar duty hocche e widget er kaj
 
   Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
+    String senderName = map['sendby']; // Assuming sender's email/name is stored in 'sendby'
+
     return map['type'] == "text"
         ? Container(
       width: size.width,
-      alignment: map['sendby'] == _auth.currentUser!.displayName
+      alignment: senderName == _auth.currentUser!.displayName
           ? Alignment.centerRight
           : Alignment.centerLeft,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.blue,
-        ),
-        child: Text(
-          map['message'],
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            senderName,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: senderName == _auth.currentUser!.displayName
+                  ? Colors.blue
+                  : Colors.green, // Use different colors for different users
+            ),
           ),
-        ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: senderName == _auth.currentUser!.displayName
+                  ? Colors.blue
+                  : Colors.green, // Use different colors for different users
+            ),
+            child: Text(
+              map['message'],
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     )
         : Container(
       height: size.height / 2.5,
       width: size.width,
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      alignment: map['sendby'] == _auth.currentUser!.displayName
+      alignment: senderName == _auth.currentUser!.displayName
           ? Alignment.centerRight
           : Alignment.centerLeft,
-      child: InkWell(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => ShowImage(
-              imageUrl: map['message'],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            senderName,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: senderName == _auth.currentUser!.displayName
+                  ? Colors.blue
+                  : Colors.green, // Use different colors for different users
             ),
           ),
-        ),
-        child: Container(
-          height: size.height / 2.5,
-          width: size.width / 2,
-          decoration: BoxDecoration(border: Border.all()),
-          alignment:Alignment.center,
-          child: map['message'] != "" && map['message'] != null
-        ? isNetworkUrl(map['message'])
-              ? Image.network(
-            map['message'],
-            fit: BoxFit.cover,
-          ): Image.file(
-            File(map['message']),
-            fit: BoxFit.cover,
-          )
-              : CircularProgressIndicator(),
-        ),
+          InkWell(
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ShowImage(
+                  imageUrl: map['message'],
+                ),
+              ),
+            ),
+            child: Container(
+              height: size.height / 2.5,
+              width: size.width / 2,
+              decoration: BoxDecoration(border: Border.all()),
+              alignment: Alignment.center,
+              child: map['message'] != "" && map['message'] != null
+                  ? isNetworkUrl(map['message'])
+                  ? Image.network(
+                map['message'],
+                fit: BoxFit.cover,
+              )
+                  : Image.file(
+                File(map['message']),
+                fit: BoxFit.cover,
+              )
+                  : CircularProgressIndicator(),
+            ),
+          ),
+        ],
       ),
     );
   }
+
 }
 
 
