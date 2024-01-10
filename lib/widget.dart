@@ -1,13 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pharmaconnectbyturjo/chatsearchpage.dart';
-import 'package:pharmaconnectbyturjo/pages/LoginPage.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
-import 'package:provider/provider.dart';
+import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
 
-import 'firebase.dart';
-
-final FirebaseAuth _auth=FirebaseAuth.instance;
 class Mywidget extends StatefulWidget {
   const Mywidget({Key? key}) : super(key: key);
 
@@ -38,17 +32,85 @@ class _MywidgetState extends State<Mywidget> {
                 padding: const EdgeInsets.only(top: 350.0),
                 child: Center(
                     child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                       MaterialPageRoute(
-                           builder: (context) => chatpage()),
-                             );
-                        },
-                        child: Text('Chat Room'))),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'LoginPage');
+                        showToast(message: 'you are succesfully home');
+                      },
+                      //child: Text('GO HOME'),
+                      child: Text('GO Home'),
+                    )),
+
               )
             ],
-          )
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 400.0),
+                child: Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'chatsearchpage');
+                        showToast(message: 'you are on PharmaConnect ChatBox');
+                      },
+                      //child: Text('GO HOME'),
+                      child: Text('Chat Box'),
+                    )),
+
+              )
+            ],
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 450.0),
+                child: Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'HomePage');
+                        showToast(message: 'you are successfully on Home Page');
+                      },
+                      //child: Text('GO HOME'),
+                      child: Text('GO to Home Page'),
+                    )),
+
+              )
+            ],
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 500.0),
+                child: Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'LoginPage');
+                        showToast(message: 'you are logged Out');
+                      },
+
+                      child: Text('Log Out'),
+                    )),
+
+              )
+            ],
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 550.0),
+                child: Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'Update_Profile');
+                        showToast(message: 'you are succesfully on settings');
+                      },
+                      //child: Text('GO HOME'),
+                      child: Text('GO to Home Page'),
+                    )),
+
+              )
+            ],
+          ),
         ],
       ),
     );

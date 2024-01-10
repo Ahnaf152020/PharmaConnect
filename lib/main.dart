@@ -1,5 +1,6 @@
 import 'dart:io';
 
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,8 @@ import 'package:pharmaconnectbyturjo/chatroom.dart';
 import 'package:pharmaconnectbyturjo/chatsearchpage.dart';
 import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart';
 import 'package:pharmaconnectbyturjo/pages/LoginPage.dart';
+import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
+//import 'package:pharmaconnectbyturjo/pages/UserPage.dart';
 import 'package:pharmaconnectbyturjo/pages/startPage.dart';
 import 'package:pharmaconnectbyturjo/register.dart';
 import 'package:pharmaconnectbyturjo/pages/HomePage.dart';
@@ -35,9 +38,11 @@ void main() async{
       'LoginPage': (context) => LoginPage(),
       'register': (context) => Myregister(),
       'forgotpassword': (context) => forgotPasswordScreen(),
-      //'widget': (context) => Mywidget(),
+      'widget': (context) => Mywidget(),
       'HomePage': (context) => HomePage(),
       'chatsearchpage': (context) => chatpage(),
+
+      'Update_Profile': (context) =>AccountScreen()
 
     },
 

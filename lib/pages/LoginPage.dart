@@ -5,8 +5,10 @@ import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import "package:iconsax/iconsax.dart";
+import 'package:pharmaconnectbyturjo/pages/HomePage.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
 import 'package:pharmaconnectbyturjo/widget.dart';
+//import 'package:pharmaconnectbyturjo/pages/UserPage.dart';
 
 import '../firebase.dart';
 
@@ -441,15 +443,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _signInWithGoogle() async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    //final GoogleSignIn _googleSignIn = GoogleSignIn();
 
     try {
-      final GoogleSignInAccount? googleSignInAccount =
+
+      /*final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
 
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
+        showToast(message: 'Successfully sign-in with Google');
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
@@ -457,10 +461,21 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "HomePage");
+        Navigator.pushNamed(context, "widget");
+
+      }*/
+      final googleUsers= await GoogleSignIn().signIn();
+      if(googleUsers==null){
+        return;
+      }
+      else{
+        final googleAuth = await googleUsers.authentication;
+        final credential= GoogleAuthProvider.credential(idToken:googleAuth?.idToken,accessToken:googleAuth?.accessToken );
+        await FirebaseAuth.instance.signInWithCredential(credential);
       }
     } catch (e) {
-      showToast(message: "some error occured $e");
+      showToast(message: e.toString());
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
     }
   }
 }
