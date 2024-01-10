@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/chatroom.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class chatpage extends StatefulWidget {
   const chatpage({super.key});
@@ -106,6 +107,16 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat Screen"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              _auth.signOut();
+              Navigator.pushNamed(context, 'LoginPage');
+
+            },
+          ),
+        ],
       ),
       body: isLoading
           ? Center(

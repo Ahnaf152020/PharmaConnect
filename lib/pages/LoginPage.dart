@@ -442,18 +442,17 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  _signInWithGoogle() async {
-    //final GoogleSignIn _googleSignIn = GoogleSignIn();
+  _signInWithGoogle()async{
+
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
 
     try {
 
-      /*final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
 
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-        showToast(message: 'Successfully sign-in with Google');
+      if(googleSignInAccount != null ){
+        final GoogleSignInAuthentication googleSignInAuthentication = await
+        googleSignInAccount.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
@@ -461,21 +460,13 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "widget");
+        Navigator.pushNamed(context, "/home");
+      }
 
-      }*/
-      final googleUsers= await GoogleSignIn().signIn();
-      if(googleUsers==null){
-        return;
-      }
-      else{
-        final googleAuth = await googleUsers.authentication;
-        final credential= GoogleAuthProvider.credential(idToken:googleAuth?.idToken,accessToken:googleAuth?.accessToken );
-        await FirebaseAuth.instance.signInWithCredential(credential);
-      }
-    } catch (e) {
-      showToast(message: e.toString());
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+    }catch(e) {
+      showToast(message: "some error occured $e");
     }
+
+
   }
 }

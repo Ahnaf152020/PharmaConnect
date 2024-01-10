@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 //import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart' ;
 
@@ -26,14 +27,16 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   bool isDarkMode = false;
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Ionicons.save),
+          onPressed: () {
+            Navigator.pushNamed(context, 'HomePage');
+          },
+          icon: const Icon(Ionicons.arrow_back),
         ),
         leadingWidth: 80,
       ),
@@ -153,7 +156,42 @@ class _AccountScreenState extends State<AccountScreen> {
                   );
                 },
               ),
+
+              const SizedBox(height: 50),
+              GestureDetector(
+                onTap: () {
+                  _auth.signOut();
+                  Navigator.pushNamed(context, 'LoginPage');
+
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.signOut, color: Colors.white,),
+                        SizedBox(width: 5,),
+                        Text(
+                          "User SignOut",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
+
+
           ),
         ),
       ),
