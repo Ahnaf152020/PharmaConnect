@@ -79,7 +79,7 @@ class ChatRoom extends StatelessWidget {
 
 
 
-
+/*
   void onSendMessage() async {
     if (_message.text.isNotEmpty) {
       Map<String, dynamic> messages = {
@@ -99,7 +99,7 @@ class ChatRoom extends StatelessWidget {
       print("Enter Some Text");
     }
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery
@@ -205,7 +205,7 @@ class ChatRoom extends StatelessWidget {
 
   //message konta kon side e ase esob dekhar duty hocche e widget er kaj
 
-  Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
+  /*Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
     String senderName = map['sendby']; // Assuming sender's email/name is stored in 'sendby'
 
     return map['type'] == "text"
@@ -255,49 +255,327 @@ class ChatRoom extends StatelessWidget {
       alignment: senderName == _auth.currentUser!.displayName
           ? Alignment.centerRight
           : Alignment.centerLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              senderName,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: senderName == _auth.currentUser!.displayName
+                    ? Colors.blue
+                    : Colors.green, // Use different colors for different users
+              ),
+            ),
+            InkWell(
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ShowImage(
+                    imageUrl: map['message'],
+                  ),
+                ),
+              ),
+              child: Container(
+                height: size.height / 2.5,
+                width: size.width / 2,
+                decoration: BoxDecoration(border: Border.all()),
+                alignment: Alignment.center,
+                child: map['message'] != "" && map['message'] != null
+                    ? isNetworkUrl(map['message'])
+                    ? Image.network(
+                  map['message'],
+                  fit: BoxFit.cover,
+                )
+                    : Image.file(
+                  File(map['message']),
+                  fit: BoxFit.cover,
+                )
+                    : CircularProgressIndicator(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }*/
+
+  /*
+  Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
+    String senderName = map['sendby']; // Assuming sender's email/name is stored in 'sendby'
+    DateTime timestamp = DateTime.now(); // Add timestamp for the message
+
+    bool isCurrentUser = senderName == _auth.currentUser!.displayName;
+
+    return Column(
+      crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: size.width,
+          alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+          child: Text(
             senderName,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              color: senderName == _auth.currentUser!.displayName
-                  ? Colors.blue
-                  : Colors.green, // Use different colors for different users
+              color: isCurrentUser ? Colors.lightBlue : Colors.green,
             ),
           ),
-          InkWell(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => ShowImage(
-                  imageUrl: map['message'],
+        ),
+        map['type'] == "text"
+            ? Container(
+          width: size.width,
+          alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: isCurrentUser ? Colors.red : Colors.green,
+                ),
+                child: Text(
+                  map['message'],
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            child: Container(
-              height: size.height / 2.5,
-              width: size.width / 2,
-              decoration: BoxDecoration(border: Border.all()),
-              alignment: Alignment.center,
-              child: map['message'] != "" && map['message'] != null
-                  ? isNetworkUrl(map['message'])
-                  ? Image.network(
-                map['message'],
-                fit: BoxFit.cover,
-              )
-                  : Image.file(
-                File(map['message']),
-                fit: BoxFit.cover,
-              )
-                  : CircularProgressIndicator(),
+              // Add timestamp for text messages
+              Padding(
+                padding: EdgeInsets.only(left: isCurrentUser ? 0 : 8, right: isCurrentUser ? 8 : 0),
+                child: Text(
+                  timestamp.toString(),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+            : InkWell(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => ShowImage(
+                imageUrl: map['message'],
+              ),
             ),
           ),
-        ],
-      ),
+          child: Container(
+            height: size.height / 2.5,
+            width: size.width,
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: size.height / 2.5,
+                    width: size.width / 2,
+                    decoration: BoxDecoration(border: Border.all()),
+                    alignment: Alignment.center,
+                    child: map['message'] != "" && map['message'] != null
+                        ? isNetworkUrl(map['message'])
+                        ? Image.network(
+                      map['message'],
+                      fit: BoxFit.cover,
+                    )
+                        : Image.file(
+                      File(map['message']),
+                      fit: BoxFit.cover,
+                    )
+                        : CircularProgressIndicator(),
+                  ),
+                  // Add timestamp for image messages
+                  Padding(
+                    padding: EdgeInsets.only(left: isCurrentUser ? 0 : 8, right: isCurrentUser ? 8 : 0),
+                    child: Text(
+                      timestamp.toString(),
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
+*/
+
+  void onSendMessage() async {
+    if (_message.text.isNotEmpty) {
+      Map<String, dynamic> message = {
+        "sendby": _auth.currentUser!.displayName,
+        "message": _message.text,
+        "type": "text",
+        "time": FieldValue.serverTimestamp(),
+        "seen": false,
+      };
+
+      _message.clear();
+      DocumentReference docRef = await _firestore
+          .collection('chatroom')
+          .doc(chatRoomId)
+          .collection('chats')
+          .add(message);
+
+      // Assume the message is sent by the current user, simulate "seen" by updating the document
+      await docRef.update({'seen': true});
+    } else {
+      print("Enter Some Text");
+    }
+  }
+
+
+
+  Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
+    String senderName = map['sendby']; // Assuming sender's email/name is stored in 'sendby'
+    DateTime timestamp = DateTime.now(); // Add timestamp for the message
+    bool isCurrentUser = senderName == _auth.currentUser!.displayName;
+
+    return Column(
+      crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: size.width,
+          alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+          child: Text(
+            senderName,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: isCurrentUser ? Colors.lightBlue : Colors.green,
+            ),
+          ),
+        ),
+        map['type'] == "text"
+            ? Container(
+          width: size.width,
+          alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: isCurrentUser ? Colors.red : Colors.green,
+                ),
+                child: Text(
+                  map['message'],
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              // Add timestamp for text messages
+              Padding(
+                padding: EdgeInsets.only(left: isCurrentUser ? 0 : 8, right: isCurrentUser ? 8 : 0),
+                child: Text(
+                  timestamp.toString(),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              // Add "seen" indicator
+              if (isCurrentUser && map['seen'] != null && map['seen'] == true)
+                Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: Text(
+                    "Seen",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        )
+            : InkWell(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => ShowImage(
+                imageUrl: map['message'],
+              ),
+            ),
+          ),
+          child: Container(
+            height: size.height / 2.5,
+            width: size.width,
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: size.height / 2.5,
+                    width: size.width / 2,
+                    decoration: BoxDecoration(border: Border.all()),
+                    alignment: Alignment.center,
+                    child: map['message'] != "" && map['message'] != null
+                        ? isNetworkUrl(map['message'])
+                        ? Image.network(
+                      map['message'],
+                      fit: BoxFit.cover,
+                    )
+                        : Image.file(
+                      File(map['message']),
+                      fit: BoxFit.cover,
+                    )
+                        : CircularProgressIndicator(),
+                  ),
+                  // Add timestamp for image messages
+                  Padding(
+                    padding: EdgeInsets.only(left: isCurrentUser ? 0 : 8, right: isCurrentUser ? 8 : 0),
+                    child: Text(
+                      timestamp.toString(),
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  // Add "seen" indicator
+                  if (isCurrentUser && map['seen'] != null && map['seen'] == true)
+                    Padding(
+                      padding: EdgeInsets.only(left: 8),
+                      child: Text(
+                        "Seen",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
 
 }
 
