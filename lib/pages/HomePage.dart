@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Container(
                       child: Image.asset(
-                        "assets/icon/Notification.png",
+                        "assets/icon/user.png",
                         height: 30,
                         fit: BoxFit.cover,
                       ),
