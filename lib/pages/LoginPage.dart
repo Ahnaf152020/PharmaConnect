@@ -467,7 +467,8 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "/home");
+        showToast(message: 'Successfully Signed in ');
+        Navigator.pushNamed(context, "HomePage");
       }
 
     }catch(e) {
