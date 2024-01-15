@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+import 'package:pharmaconnectbyturjo/Contains/Categories.dart';
 
 
-class PopularProduct extends StatefulWidget {
-  const PopularProduct({Key? key}) : super(key: key);
+class BabyProduct extends StatefulWidget {
+  const BabyProduct({Key? key}) : super(key: key);
 
   @override
-  State<PopularProduct> createState() => _PopularProductState();
+  State<BabyProduct> createState() => _BabyProductState();
 }
 
-class _PopularProductState extends State<PopularProduct> {
-  final List<Map<String, dynamic>> PopularProduct = [
+class _BabyProductState extends State<BabyProduct> {
+  final List<Map<String, dynamic>> BabyCare = [
     {
       "product_id": 1,
       "title": "Clungene Covid-19 Rapid Antigen Test KitSARS-CoV-2",
@@ -99,9 +101,9 @@ class _PopularProductState extends State<PopularProduct> {
           mainAxisSpacing: 12.0,
           mainAxisExtent: 270,
         ),
-        itemCount: PopularProduct.length,
+        itemCount: BabyCare.length,
         itemBuilder: (_, index) {
-          print(PopularProduct.elementAt(index)['images']);
+          print(BabyCare.elementAt(index)['images']);
           return SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
@@ -121,7 +123,7 @@ class _PopularProductState extends State<PopularProduct> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Image.asset(
-                        PopularProduct.elementAt(index)['images'],
+                        BabyCare.elementAt(index)['images'],
                         height: 130,
                         fit: BoxFit.cover,
                       ),
@@ -133,24 +135,24 @@ class _PopularProductState extends State<PopularProduct> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${PopularProduct.elementAt(index)['title']}",
+                          "${BabyCare.elementAt(index)['title']}",
                           style: Theme.of(context).textTheme.subtitle1!.merge(
-                                const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
+                            const TextStyle(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 5.0,
                         ),
                         Text(
-                          "${PopularProduct.elementAt(index)['price']}",
+                          "${BabyCare.elementAt(index)['price']}",
                           style: Theme.of(context).textTheme.subtitle2!.merge(
-                                TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                            TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black54,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -184,3 +186,4 @@ class _PopularProductState extends State<PopularProduct> {
     );
   }
 }
+

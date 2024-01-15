@@ -18,6 +18,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pharmaconnectbyturjo/widget.dart';
 import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart';
+import 'package:pharmaconnectbyturjo/Contains/SurgicalProduct.dart';
+import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,9 +31,16 @@ void main() async{
       projectId: "pharmaconnect-caa87",
       storageBucket: "pharmaconnect-caa87.appspot.com"),)
   : await Firebase.initializeApp();
-  runApp(MaterialApp(
+  bool isLoggedIn= false;
+  final user = FirebaseAuth.instance.currentUser;
+  if(user!=null) isLoggedIn = true;
+
+  runApp(
+      MaterialApp(
+
       debugShowCheckedModeBanner: false,
-      home: StartPage(),
+
+      home: isLoggedIn ? const HomePage() : const LoginPage(),
     initialRoute: 'StartPage',
     routes: {
       'Startpage': (context) => StartPage(),
@@ -42,9 +51,15 @@ void main() async{
       'HomePage': (context) => HomePage(),
       'chatsearchpage': (context) => chatpage(),
 
-      'Update_Profile': (context) =>AccountScreen()
+      'Update_Profile': (context) =>AccountScreen(),
+      'PersonalCare': (context) =>PersonalProduct(),
+      'SurgicalProduct': (context) =>SurgicalProduct()
 
     },
 
 ));
 }
+/*void initState() {
+  // TODO: implement initState
+  super.initState();
+}*/

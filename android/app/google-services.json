@@ -12,7 +12,20 @@
           "package_name": "com.example.pharmaconnectbyturjo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1126007332-ebsub3m6c5cg05b4ntvbh98ce39d4jqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pharmaconnectbyturjo",
+            "certificate_hash": "a015656b3a3d52bb5239be4676bf0bce1657d9dd"
+          }
+        },
+        {
+          "client_id": "1126007332-7ehogp5qsbdaub4f4rb09312l17addag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC_tlswOmwEsCAvNTU7oT-fasgMAEroyFE"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1126007332-7ehogp5qsbdaub4f4rb09312l17addag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

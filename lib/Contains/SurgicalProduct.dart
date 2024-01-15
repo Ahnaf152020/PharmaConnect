@@ -1,87 +1,54 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+import 'package:pharmaconnectbyturjo/Contains/Categories.dart';
 
 
-class PopularProduct extends StatefulWidget {
-  const PopularProduct({Key? key}) : super(key: key);
+
+class SurgicalProduct extends StatefulWidget {
+  const SurgicalProduct({Key? key}) : super(key: key);
 
   @override
-  State<PopularProduct> createState() => _PopularProductState();
+  State<SurgicalProduct> createState() => _SurgicalProductState();
 }
 
-class _PopularProductState extends State<PopularProduct> {
-  final List<Map<String, dynamic>> PopularProduct = [
+class _SurgicalProductState extends State<SurgicalProduct> {
+  final List<Map<String, dynamic>> SurgicalProduct = [
     {
-      "product_id": 1,
-      "title": "Clungene Covid-19 Rapid Antigen Test KitSARS-CoV-2",
-      "product_type": "",
-      "price": "\u09f3699.00",
-      "images": "assets/Medicine/1.png"
+      "product_id": 26,
+      "title": "Surgical Face Mask Type IBeximco Health",
+      "product_type": "Beximco Pharmaceuticals Ltd.",
+      "price": "\u09f3340.00",
+      "images": "assets/Medicine/26.png"
     },
     {
-      "product_id": 2,
-      "title": "Alcohol Pad",
+      "product_id": 27,
+      "title": "Medical Surgical Head Cap Mop Clip Head Cover/Caps-Sky Blue",
       "product_type": "Surgical Kit",
-      "price": "\u09f372.00",
-      "images": "assets/Medicine/2.png"
+      "price": "\u09f32.70",
+      "images": "assets/Medicine/27.png"
     },
     {
-      "product_id": 3,
-      "title": "Rossmax Fingertip Pulse Oximeter SB-100SB-100",
-      "product_type": "",
-      "price": "\u09f33080.00",
-      "images": "assets/Medicine/3.png"
-    },
-    {
-      "product_id": 4,
-      "title": "Baby Face Mask1s",
-      "product_type": "Surgical Kit",
-      "price": 0,
-      "images": "assets/Medicine/4.png"
-    },
-    {
-      "product_id": 5,
-      "title": "Thermometer Digital Flexible TipFlexible Tip",
-      "product_type": "",
-      "price": "\u09f3120.00",
-      "images": "assets/Medicine/5.png"
-    },
-    {
-      "product_id": 6,
-      "title": "Sepnil Face MaskBlue Color",
+      "product_id": 80,
+      "title": "Sepnil Face Mask Skin ColorSkin Color",
       "product_type": "Square Toiletries Limited",
       "price": "\u09f3280.00",
-      "images": "assets/Medicine/6.png"
+      "images": "assets/Medicine/80.png"
     },
     {
-      "product_id": 7,
-      "title": "Turaag ProteX Three Layered Face Protection Mask For MenAntiviral High Performance Face Mask",
-      "product_type": "Unimed Unihealth Pharmaceuticals Ltd.",
-      "price": "\u09f3160.00",
-      "images": "assets/Medicine/7.png"
+      "product_id": 86,
+      "title": "Thermometer Digital Flexible Tip(Bioband)",
+      "product_type": "Bioband Safetymatics Co",
+      "price": "\u09f3198.00",
+      "images": "assets/Medicine/86.png"
     },
     {
-      "product_id": 8,
-      "title": "N95 Mask Particulate Respirator Face MaskModel-1860",
+      "product_id": 96,
+      "title": "Fashionable Face Mask For MenColor Family-Black (Free Size)",
       "product_type": "Surgical Kit",
-      "price": "\u09f3299.00",
-      "images": "assets/Medicine/8.png"
+      "price": "\u09f3110.00",
+      "images": "assets/Medicine/96.png"
     },
-    {
-      "product_id": 9,
-      "title": "Paxovir150mg+100mg",
-      "product_type": "Eskayef Pharmaceuticals Ltd.",
-      "price": "\u09f33040.00",
-      "images": "assets/Medicine/9.png"
-    },
-    {
-      "product_id": 10,
-      "title": "Face Shield Glass Type-Smart Protective Safety With Frame(1Pc)",
-      "product_type": "Surgical Kit",
-      "price": 0,
-      "images": "assets/Medicine/10.png"
-    },
-
 
 
 
@@ -89,8 +56,11 @@ class _PopularProductState extends State<PopularProduct> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: GridView.builder(
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+
+          child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -99,9 +69,9 @@ class _PopularProductState extends State<PopularProduct> {
           mainAxisSpacing: 12.0,
           mainAxisExtent: 270,
         ),
-        itemCount: PopularProduct.length,
+        itemCount: SurgicalProduct.length,
         itemBuilder: (_, index) {
-          print(PopularProduct.elementAt(index)['images']);
+          print(SurgicalProduct.elementAt(index)['images']);
           return SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
@@ -121,7 +91,7 @@ class _PopularProductState extends State<PopularProduct> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Image.asset(
-                        PopularProduct.elementAt(index)['images'],
+                        SurgicalProduct.elementAt(index)['images'],
                         height: 130,
                         fit: BoxFit.cover,
                       ),
@@ -133,24 +103,24 @@ class _PopularProductState extends State<PopularProduct> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${PopularProduct.elementAt(index)['title']}",
+                          "${SurgicalProduct.elementAt(index)['title']}",
                           style: Theme.of(context).textTheme.subtitle1!.merge(
-                                const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
+                            const TextStyle(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 5.0,
                         ),
                         Text(
-                          "${PopularProduct.elementAt(index)['price']}",
+                          "${SurgicalProduct.elementAt(index)['price']}",
                           style: Theme.of(context).textTheme.subtitle2!.merge(
-                                TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                            TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black54,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -180,7 +150,10 @@ class _PopularProductState extends State<PopularProduct> {
             ),
           );
         },
+
       ),
+    )
     );
   }
 }
+

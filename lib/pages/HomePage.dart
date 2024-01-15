@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
+import 'package:pharmaconnectbyturjo/Contains/SurgicalProduct.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -105,7 +107,11 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+
+                      // traverse personal care page
+                      Navigator.pushNamed(context, 'PersonalCare');
+                    },
                     child: Column(
                       children: [
                         Container(
@@ -124,7 +130,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+
+
+                      //Baby care
+                    },
                     child: Column(
                       children: [
                         Container(
@@ -143,7 +153,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      //Surgical product
+                      Navigator.pushNamed(context, 'SurgicalProduct');
+
+                    },
                     child: Column(
                       children: [
                         Container(
@@ -170,7 +184,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+
+                      //women care
+                    },
                     child: Column(
                       children: [
                         Container(
@@ -189,7 +206,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+
+                      //Dental Care
+                    },
                     child: Column(
                       children: [
                         Container(
