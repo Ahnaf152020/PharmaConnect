@@ -86,64 +86,66 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       appBar: AppBar(
         title: Text('User Profile'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GestureDetector(
-              onTap: _uploadImage,
-              child: _profileImageUrl != null
-                  ? CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(_profileImageUrl!),
-              )
-                  : CircleAvatar(
-                radius: 50,
-                child: Icon(Icons.camera_alt),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: _uploadImage,
+                child: _profileImageUrl != null
+                    ? CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(_profileImageUrl!),
+                )
+                    : CircleAvatar(
+                  radius: 50,
+                  child: Icon(Icons.camera_alt),
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Container(child: Text('${_usernameController.text}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                height: 1.5, // Adjust the height as needed
-              ),)),
-            SizedBox(height: 20),
+              SizedBox(height: 10),
+              Container(child: Text('${_usernameController.text}',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  height: 1.5, // Adjust the height as needed
+                ),)),
+              SizedBox(height: 20),
 
-            Text('Username:'),
-            TextField(
-              controller: _usernameController,
-              decoration: const  InputDecoration(
-                contentPadding: EdgeInsets.all(10),
-                border: OutlineInputBorder(),
+              Text('Username:'),
+              TextField(
+                controller: _usernameController,
+                decoration: const  InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            Text('Email:'),
-            TextField(
-              controller: _emailController,
-              decoration: const  InputDecoration(
-                contentPadding: EdgeInsets.all(10),
-                border: OutlineInputBorder(),
+              SizedBox(height: 20),
+              Text('Email:'),
+              TextField(
+                controller: _emailController,
+                decoration: const  InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            Text('Address:'),
-            TextField(
-              controller: _addressController,
-              decoration: const  InputDecoration(
-                contentPadding: EdgeInsets.all(10),
-                border: OutlineInputBorder(),
+              SizedBox(height: 20),
+              Text('Address:'),
+              TextField(
+                controller: _addressController,
+                decoration: const  InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _updateUserProfile,
-              child: Text('Update Profile'),
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _updateUserProfile,
+                child: Text('Update Profile'),
+              ),
+            ],
+          ),
         ),
       ),
     );

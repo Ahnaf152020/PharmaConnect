@@ -5,17 +5,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class chatpage extends StatefulWidget {
-  const chatpage({super.key});
+  const chatpage({Key? key}) : super(key: key);
 
   @override
   State<chatpage> createState() => _chatpageState();
 }
 
-
-class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
-
-  Map<String, dynamic> ? userMap;
-  bool isLoading=false;
+class _chatpageState extends State<chatpage> with WidgetsBindingObserver {
+  Map<String, dynamic>? userMap;
+  bool isLoading = false;
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -28,9 +26,10 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
   }
 
   void setStatus(String status) async {
-    await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
-      "status": status,
-    });
+    await _firestore
+        .collection('users')
+        .doc(_auth.currentUser!.uid)
+        .update({"status": status});
   }
 
   @override
@@ -43,7 +42,6 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
       setStatus("Offline");
     }
   }
-
 
   String chatRoomId(String user1, String user2) {
     if (user1 != null &&
@@ -64,16 +62,11 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
       }
     }
 
-    // Return null if any of the conditions are not met
+    // Return an empty string if any of the conditions are not met
     return "";
   }
 
-
-
-
   void onSearch() async {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
     setState(() {
       isLoading = true;
     });
@@ -84,7 +77,6 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
         .get()
         .then((value) {
       setState(() {
-        //userMap = value.docs[0].data();
         isLoading = false;
       });
       if (value.docs.isNotEmpty) {
@@ -96,10 +88,8 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
         // Handle the case where no matching user is found
         print("User not found");
       }
-     // print(userMap);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +103,6 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
             onPressed: () {
               _auth.signOut();
               Navigator.pushNamed(context, 'LoginPage');
-
             },
           ),
         ],
@@ -126,7 +115,7 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
           child: CircularProgressIndicator(),
         ),
       )
-      : Column(
+          : Column(
         children: [
           SizedBox(
             height: size.height / 20,
@@ -149,58 +138,64 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
               ),
             ),
           ),
-
           SizedBox(
             height: size.height / 50,
           ),
           ElevatedButton(
-            onPressed:  onSearch,
+            onPressed: onSearch,
             child: Text("Search"),
           ),
-
-
           SizedBox(
             height: size.height / 20,
           ),
+          userMap != null
+              ? ListTile(
+            onTap: () {
+              String roomId = chatRoomId(
+                  _auth.currentUser!.displayName!,
+                  userMap!['user name']);
 
-
-      userMap != null?
-      ListTile(
-        onTap: () {
-
-            String roomId = chatRoomId(
-                _auth.currentUser!.displayName!,
-                userMap!['user name']);
-
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) =>
-                  ChatRoom(
-                    chatRoomId: roomId,
-                    userMap: userMap!,
-                  ),
-            ),
-            );
-
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => ChatRoom(
+                  chatRoomId: roomId,
+                  userMap: userMap!,
+                ),
+              ));
             },
-
-
-        leading: Icon(Icons.account_box, color: Colors.black),
-        title: Text(
-          userMap!['user name'],
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 17,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        subtitle: Text(userMap!['e-mail']),
-        trailing: Icon(Icons.chat, color: Colors.black),
-      ): Container(),
-
-
-
+            leading: UserProfilePicture(
+              profilePictureUrl: userMap!['profileImageUrl'],
+            ),
+            title: Text(
+              userMap!['user name'],
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(userMap!['e-mail']),
+            trailing: Icon(Icons.chat, color: Colors.black),
+          )
+              : Container(),
         ],
       ),
     );
   }
 }
+
+class UserProfilePicture extends StatelessWidget {
+  final String? profilePictureUrl;
+
+  UserProfilePicture({this.profilePictureUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      backgroundImage: profilePictureUrl != null
+          ? NetworkImage(profilePictureUrl!)
+          : AssetImage('assets/icon/user.png') as ImageProvider<Object>?, // Explicitly cast to ImageProvider<Object>?
+      radius: 20, // Adjust the radius as needed
+    );
+  }
+}
+

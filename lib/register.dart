@@ -260,7 +260,7 @@ class _RegisterPageState extends State<Myregister> {
           _usernameController.text.trim(),
           _emailController.text.trim(), //(2)
         );*/
-        Navigator.pushNamed(context, 'LoginPage');
+        Navigator.pushNamed(context, 'HomePage');
       } else {
         showToast(message: "error occured in signup");
       }
