@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
-import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
-import 'package:pharmaconnectbyturjo/Contains/SurgicalProduct.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

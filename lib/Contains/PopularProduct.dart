@@ -101,7 +101,6 @@ class _PopularProductState extends State<PopularProduct> {
         ),
         itemCount: PopularProduct.length,
         itemBuilder: (_, index) {
-          print(PopularProduct.elementAt(index)['images']);
           return SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(

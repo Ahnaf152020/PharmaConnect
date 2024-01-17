@@ -71,7 +71,6 @@ class _SurgicalProductState extends State<SurgicalProduct> {
         ),
         itemCount: SurgicalProduct.length,
         itemBuilder: (_, index) {
-          print(SurgicalProduct.elementAt(index)['images']);
           return SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
