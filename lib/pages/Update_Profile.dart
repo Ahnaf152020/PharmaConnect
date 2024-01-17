@@ -9,6 +9,7 @@ import 'package:ionicons/ionicons.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path/path.dart' as Path  ;
 import "package:iconsax/iconsax.dart";
+import 'package:pharmaconnectbyturjo/pages/%20UserProfileScreen.dart';
 import 'package:pharmaconnectbyturjo/pages/edit_screen.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
 import 'package:pharmaconnectbyturjo/widget.dart';
@@ -95,7 +96,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const EditAccountScreen(),
+                           // builder: (context) => const EditAccountScreen(),
+                            builder: (context) =>  UserProfileScreen(),
                           ),
                         );
                       },
