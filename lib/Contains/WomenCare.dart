@@ -91,7 +91,9 @@ class _WomenProductState extends State<WomenProduct> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body:SingleChildScrollView(
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -183,6 +185,7 @@ class _WomenProductState extends State<WomenProduct> {
           );
         },
       ),
+    )
     );
   }
 }
