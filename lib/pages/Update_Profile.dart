@@ -35,7 +35,7 @@ class _AccountScreenState extends State<AccountScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'HomePage');
+            Navigator.pushNamed(context, 'MyBottomBar');
           },
           icon: const Icon(Ionicons.arrow_back),
         ),
