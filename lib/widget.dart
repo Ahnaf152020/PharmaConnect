@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/notificationscreen.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
 import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
 
@@ -84,7 +85,7 @@ class _MywidgetState extends State<Mywidget> {
                 child: Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'LoginPage');
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => MainScreen()));
                         showToast(message: 'you are logged Out');
                       },
 
