@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pharmaconnectbyturjo/notificationscreen.dart';
+import 'package:pharmaconnectbyturjo/notificationservice.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
 import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
 
@@ -11,6 +11,13 @@ class Mywidget extends StatefulWidget {
 }
 
 class _MywidgetState extends State<Mywidget> {
+  NotificationService notification = NotificationService();
+
+@override
+void initState(){
+  super.initState();
+  notification.initialiseNotifications();
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +92,6 @@ class _MywidgetState extends State<Mywidget> {
                 child: Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => MainScreen()));
                         showToast(message: 'you are logged Out');
                       },
 
@@ -100,18 +106,22 @@ class _MywidgetState extends State<Mywidget> {
               Padding(
                 padding: const EdgeInsets.only(top: 550.0),
                 child: Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'Update_Profile');
-                        showToast(message: 'you are succesfully on settings');
-                      },
-                      //child: Text('GO HOME'),
-                      child: Text('GO to Home Page'),
-                    )),
+                  child: GestureDetector(
+                    onTap: () {
 
-              )
+                    },
+                    child: ElevatedButton(
+                      child: Text('Notify'),
+                      onPressed: () {
+                        notification.sendNotification("this is a message", "this is a body");
+                      },
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
+
         ],
       ),
     );

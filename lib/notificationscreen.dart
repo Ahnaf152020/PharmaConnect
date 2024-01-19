@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
 
     tz.initializeTimeZones();
-    NotificationService().initNotification(); // Ensure initNotification is called
+    //NotificationService().initNotification(); // Ensure initNotification is called
   }
 
   @override
@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                NotificationService().cancelAllNotifications();
+               // NotificationService().cancelAllNotifications();
               },
               child: Container(
                 height: 40,
@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               onTap: () {
-                NotificationService().showNotification(1, "title", "body", 10);
+                //NotificationService().showNotification(1, "title", "body", 10);
               },
               child: Container(
                 height: 40,
