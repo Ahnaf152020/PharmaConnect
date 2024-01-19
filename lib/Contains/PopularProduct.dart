@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 
 class PopularProduct extends StatefulWidget {
   const PopularProduct({Key? key}) : super(key: key);
@@ -10,176 +9,147 @@ class PopularProduct extends StatefulWidget {
 }
 
 class _PopularProductState extends State<PopularProduct> {
-  final List<Map<String, dynamic>> PopularProduct = [
-    {
-      "product_id": 1,
-      "title": "Clungene Covid-19 Rapid Antigen Test KitSARS-CoV-2",
-      "product_type": "",
-      "price": "\u09f3699.00",
-      "images": "assets/Medicine/1.png"
-    },
-    {
-      "product_id": 2,
-      "title": "Alcohol Pad",
-      "product_type": "Surgical Kit",
-      "price": "\u09f372.00",
-      "images": "assets/Medicine/2.png"
-    },
-    {
-      "product_id": 3,
-      "title": "Rossmax Fingertip Pulse Oximeter SB-100SB-100",
-      "product_type": "",
-      "price": "\u09f33080.00",
-      "images": "assets/Medicine/3.png"
-    },
-    {
-      "product_id": 4,
-      "title": "Baby Face Mask1s",
-      "product_type": "Surgical Kit",
-      "price": 0,
-      "images": "assets/Medicine/4.png"
-    },
-    {
-      "product_id": 5,
-      "title": "Thermometer Digital Flexible TipFlexible Tip",
-      "product_type": "",
-      "price": "\u09f3120.00",
-      "images": "assets/Medicine/5.png"
-    },
-    {
-      "product_id": 6,
-      "title": "Sepnil Face MaskBlue Color",
-      "product_type": "Square Toiletries Limited",
-      "price": "\u09f3280.00",
-      "images": "assets/Medicine/6.png"
-    },
-    {
-      "product_id": 7,
-      "title": "Turaag ProteX Three Layered Face Protection Mask For MenAntiviral High Performance Face Mask",
-      "product_type": "Unimed Unihealth Pharmaceuticals Ltd.",
-      "price": "\u09f3160.00",
-      "images": "assets/Medicine/7.png"
-    },
-    {
-      "product_id": 8,
-      "title": "N95 Mask Particulate Respirator Face MaskModel-1860",
-      "product_type": "Surgical Kit",
-      "price": "\u09f3299.00",
-      "images": "assets/Medicine/8.png"
-    },
-    {
-      "product_id": 9,
-      "title": "Paxovir150mg+100mg",
-      "product_type": "Eskayef Pharmaceuticals Ltd.",
-      "price": "\u09f33040.00",
-      "images": "assets/Medicine/9.png"
-    },
-    {
-      "product_id": 10,
-      "title": "Face Shield Glass Type-Smart Protective Safety With Frame(1Pc)",
-      "product_type": "Surgical Kit",
-      "price": 0,
-      "images": "assets/Medicine/10.png"
-    },
+  final FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
 
+  List<Map<String, dynamic>> popularProducts = [];
 
+  Future<void> fetchProducts() async {
+    try {
+      QuerySnapshot qn =
+      await _firestoreInstance.collection("PopularProducts").get();
+      setState(() {
+        popularProducts = qn.docs.map((doc) {
+          return {
+            "product_name": doc["product_name"],
+            //"product_description": doc["product_description"],
+            "product_price": doc["product_price"],
+            "product_image": doc["product_image"],
+          };
+        }).toList();
+      });
+    } catch (e) {
+      print("Error fetching products: $e");
+    }
+  }
 
-
-  ];
+  @override
+  void initState() {
+    super.initState();
+    fetchProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12.0,
-          mainAxisSpacing: 12.0,
-          mainAxisExtent: 270,
-        ),
-        itemCount: PopularProduct.length,
-        itemBuilder: (_, index) {
-          return SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  16.0,
+    return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12.0,
+        mainAxisSpacing: 10.0,
+        mainAxisExtent: 300,
+      ),
+      itemCount: popularProducts.length,
+      itemBuilder: (_, index) {
+        return Container(
+          decoration: BoxDecoration(
+            //color: const Color(0xFFFFECDF),
+            border: Border.all(
+              color: Color(0xFFFFECDF),
+            ),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFFFFECDF), //New
+                  blurRadius: 2.0,
+                )
+              ],
+            borderRadius: BorderRadius.circular(16.0),
+            color: const Color(0xFFFFECDF),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 150,
+                  width: double.infinity,
+                  // decoration: BoxDecoration(
+                  //     gradient: LinearGradient(
+                  //       begin: Alignment.topRight,
+                  //       end: Alignment.bottomLeft,
+                  //       colors: [
+                  //         Colors.blue,
+                  //         Colors.red,
+                  //       ],
+                  //     ),),
+                  child: Image.network(popularProducts[index]["product_image"]),
                 ),
-                color: const Color(0xFFFFECDF),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16.0),
-                      topRight: Radius.circular(16.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Image.asset(
-                        PopularProduct.elementAt(index)['images'],
-                        height: 130,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Colors.grey,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0,right: 10),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${PopularProduct.elementAt(index)['title']}",
-                          style: Theme.of(context).textTheme.subtitle1!.merge(
-                                const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                        Expanded(
+                          child: Text(
+                            "${popularProducts[index]["product_name"]}",
+                            style: Theme.of(context).textTheme.subtitle1!.merge(
+                              const TextStyle(
+                                fontWeight: FontWeight.w700,
                               ),
-                        ),
-                        const SizedBox(
-                          height: 5.0,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         Text(
-                          "${PopularProduct.elementAt(index)['price']}",
+                          "Price: ${popularProducts[index]['product_price']}৳",
                           style: Theme.of(context).textTheme.subtitle2!.merge(
-                                TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 00, right: 00),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            CupertinoIcons.heart,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            CupertinoIcons.cart,
+                            TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black54,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 0, right: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.favorite,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.shopping_cart,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
