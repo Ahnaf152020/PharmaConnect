@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/notificationscreen.dart';
 import 'package:pharmaconnectbyturjo/notificationservice.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
 import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
@@ -113,7 +114,9 @@ void initState(){
                     child: ElevatedButton(
                       child: Text('Notify'),
                       onPressed: () {
-                        notification.sendNotification("this is a message", "this is a body");
+                       // notification.sendNotification("this is a message", "this is a body");
+                        Navigator.pushNamed(context, 'notificationpage');
+                       // Navigator.push(context,MaterialPageRoute(builder: (context) => ()));
                       },
                     ),
                   ),

@@ -1,65 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:pharmaconnectbyturjo/notificationservice.dart';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
-
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    tz.initializeTimeZones();
-    //NotificationService().initNotification(); // Ensure initNotification is called
-  }
+class NotificationP extends StatelessWidget {
+  Map<String, String?> payload = {};
 
   @override
   Widget build(BuildContext context) {
+    payload = ModalRoute.of(context)?.settings.arguments as Map<String, String?>;
+
     return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-               // NotificationService().cancelAllNotifications();
-              },
-              child: Container(
-                height: 40,
-                width: 200,
-                color: Colors.red,
-                child: Center(
-                  child: Text(
-                    "Cancel All Notifications",
-                  ),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                //NotificationService().showNotification(1, "title", "body", 10);
-              },
-              child: Container(
-                height: 40,
-                width: 200,
-                color: Colors.green,
-                child: Center(
-                  child: Text(
-                    "Show Notification",
-                  ),
-                ),
-              ),
-            ),
-          ],
+      appBar: AppBar(
+        title: Text(
+          'Notification',
+          style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
         ),
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            onPressed: () => {},
+            icon: Icon(Icons.menu, color: Colors.white),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Text('This is a notification page! $payload', style: TextStyle(fontSize: 20)),
       ),
     );
   }
