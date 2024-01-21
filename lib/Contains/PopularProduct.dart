@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 
 class PopularProduct extends StatefulWidget {
   const PopularProduct({Key? key}) : super(key: key);
@@ -33,13 +35,11 @@ class _PopularProductState extends State<PopularProduct> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    fetchProducts();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeScreenController());
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
