@@ -440,7 +440,7 @@ class _LoginPageState extends State<LoginPage> {
         showToast(message: "succesfully done signin");
 
 
-        Navigator.pushNamed(context, 'HomePage');
+        Navigator.pushNamed(context, 'MyBottomBar');
       } else {
         showToast(message: "error occured in signin");
       }

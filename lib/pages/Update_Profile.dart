@@ -11,6 +11,7 @@ import 'package:path/path.dart' as Path  ;
 import "package:iconsax/iconsax.dart";
 import 'package:pharmaconnectbyturjo/pages/edit_screen.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
+import 'package:pharmaconnectbyturjo/userprofile2.dart';
 import 'package:pharmaconnectbyturjo/widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pharmaconnectbyturjo/pages/forward_button.dart';
@@ -34,7 +35,7 @@ class _AccountScreenState extends State<AccountScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'HomePage');
+            Navigator.pushNamed(context, 'MyBottomBar');
           },
           icon: const Icon(Ionicons.arrow_back),
         ),
@@ -95,7 +96,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const EditAccountScreen(),
+                           // builder: (context) => const EditAccountScreen(),
+                            builder: (context) =>  UserProfileScreen(),
                           ),
                         );
                       },

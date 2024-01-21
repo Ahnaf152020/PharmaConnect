@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
-import 'package:pharmaconnectbyturjo/Contains/Categories.dart';
+
 
 
 class PersonalProduct extends StatefulWidget {
@@ -112,7 +111,6 @@ class _PersonalProductState extends State<PersonalProduct> {
         ),
         itemCount: PersonalCare.length,
         itemBuilder: (_, index) {
-          print(PersonalCare.elementAt(index)['images']);
           return SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
