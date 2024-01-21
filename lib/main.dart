@@ -51,8 +51,8 @@ void main() async {
       'chatsearchpage': (context) => chatpage(),
       'MyBottomBar': (context) => MyBottomBar(),
       'Update_Profile': (context) => AccountScreen(),
-      'PersonalCare': (context) => PersonalProduct(),
-      'SurgicalProduct': (context) => SurgicalProduct()
+      'SurgicalProduct': (context) => SurgicalProduct(),
+      'PersonalCare':(Context)=> PersonalCare(),
     },
   ));
 }
