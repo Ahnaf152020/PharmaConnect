@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProductModel.dart';
 
 class HomeScreenController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   late List<PopularProductModel> popularProducts;
+
 
   RxBool isLoading = true.obs;
 

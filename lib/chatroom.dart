@@ -108,17 +108,33 @@ class ChatRoom extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: StreamBuilder<DocumentSnapshot>(
-          stream:
-          _firestore.collection("users").doc(userMap['uid']).snapshots(),
+          stream: _firestore.collection("users").doc(userMap['uid']).snapshots(),
           builder: (context, snapshot) {
-            if (snapshot.data != null) {
+            if (snapshot.hasData) {
+              String? profileImageUrl = snapshot.data!['profileImageUrl'];
+
               return Container(
-                child: Column(
+                child: Row(
                   children: [
-                    Text(userMap['user name']),
-                    Text(
-                      snapshot.data!['status'],
-                      style: TextStyle(fontSize: 14),
+                    // Check if the user has a profile image
+                    profileImageUrl != null && profileImageUrl.isNotEmpty
+                        ? CircleAvatar(
+                      backgroundImage: NetworkImage(profileImageUrl),
+                      radius: 20,
+                    )
+                        : Icon(Icons.account_circle, size: 40),
+
+                    SizedBox(width: 10),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(userMap['user name']),
+                        Text(
+                          snapshot.data!['status'],
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -129,6 +145,8 @@ class ChatRoom extends StatelessWidget {
           },
         ),
       ),
+
+
 
 
       body: SingleChildScrollView(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
+import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -108,9 +110,10 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => PersonalCare()));
                       // traverse personal care page
-                      Navigator.pushNamed(context, 'PersonalCare');
+                      // Navigator.pushNamed(context, 'PersonalCare');
                     },
                     child: Column(
                       children: [
