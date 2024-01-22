@@ -41,28 +41,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  /*Container(
+        GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, 'NotificationHome');
+            },
+
+                  child:Container(
                     child: Image.asset(
                       "assets/icon/Notification.png",
                       height: 30,
                       fit: BoxFit.cover,
                     ),
-                  ),*/
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, 'Update_Profile');
-                    },
-                    child: Container(
-                      child: Image.asset(
-                        "assets/icon/user.png",
-                        height: 30,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
                   ),
+        ),
                   SizedBox(
                     width: 20,
                   ),
