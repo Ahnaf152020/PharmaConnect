@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/pages/NotificationHome.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/chatroom.dart';
 import 'package:pharmaconnectbyturjo/chatsearchpage.dart';
@@ -53,6 +54,8 @@ void main() async {
       'Update_Profile': (context) => AccountScreen(),
       'SurgicalProduct': (context) => SurgicalProduct(),
       'PersonalCare':(Context)=> PersonalCare(),
+      'NotificationHome':(Context)=> NotificationHome(),
+
     },
   ));
 }

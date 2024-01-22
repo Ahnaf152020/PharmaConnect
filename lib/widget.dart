@@ -12,13 +12,13 @@ class Mywidget extends StatefulWidget {
 }
 
 class _MywidgetState extends State<Mywidget> {
-  NotificationService notification = NotificationService();
+  //NotificationService notification = NotificationService();
 
 @override
-void initState(){
+/*void initState(){
   super.initState();
   notification.initialiseNotifications();
-}
+}*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +115,7 @@ void initState(){
                       child: Text('Notify'),
                       onPressed: () {
                        // notification.sendNotification("this is a message", "this is a body");
-                        Navigator.pushNamed(context, 'notificationpage');
+                        Navigator.pushNamed(context, 'NotificationHome');
                        // Navigator.push(context,MaterialPageRoute(builder: (context) => ()));
                       },
                     ),

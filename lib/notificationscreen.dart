@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
-class NotificationP extends StatelessWidget {
-  Map<String, String?> payload = {};
+class NotificationScreen extends StatelessWidget {
+  //Map<String, String?> payload = {};
+  const NotificationScreen({
+    Key?key,
+    required this.payload,
 
+
+  }) : super(key: key)  ;
+  final String payload;
   @override
   Widget build(BuildContext context) {
-    payload = ModalRoute.of(context)?.settings.arguments as Map<String, String?>;
+   // payload = ModalRoute.of(context)?.settings.arguments as Map<String, String?>;
 
     return Scaffold(
       appBar: AppBar(
@@ -23,7 +29,7 @@ class NotificationP extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text('This is a notification page! $payload', style: TextStyle(fontSize: 20)),
+        child: Text('This is a notification page! $payload', style: TextStyle(fontSize: 25)),
       ),
     );
   }
