@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+import 'package:pharmaconnectbyturjo/pages/SearchPage.dart';
+import 'package:pharmaconnectbyturjo/pages/searchscreen.dart';
 
 
 
@@ -37,8 +40,11 @@ class _HomePageState extends State<HomePage> {
                         contentPadding: EdgeInsets.all(10),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
+
                         ),
                       ),
+                      onTap: () => Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => SearchScreen())),
                     ),
                   ),
         GestureDetector(

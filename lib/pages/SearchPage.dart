@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 //import 'package:pharmaconnectbyturjo/Contains/PersController.dart';
@@ -127,3 +127,4 @@ class SearchPage extends SearchDelegate{
 
 
 }
+*/
