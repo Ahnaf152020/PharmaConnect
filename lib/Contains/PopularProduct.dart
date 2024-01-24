@@ -46,6 +46,12 @@ class _PopularProductState extends State<PopularProduct> {
                   border: Border.all(
                     color: const Color(0xFFFFECDF),
                   ),
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomRight,
+                      colors: [
+                        const Color(0xFFAF7A).withOpacity(.8),
+                        const Color(0xFFFFECDF).withOpacity(.0)
+                      ]),
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0xFFFFECDF),

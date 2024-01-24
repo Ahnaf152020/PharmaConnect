@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:pharmaconnectbyturjo/Contains/BabyCareModel.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProductModel.dart';
 
 import '../toast.dart';
@@ -8,7 +9,7 @@ class HomeScreenController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   late List<PopularProductModel> popularProducts;
-
+  late List<BabyCareModel> babyCare;
   List<PopularProductModel> searchResults = [];
 
   bool isSearchLoading = false;
@@ -25,6 +26,7 @@ class HomeScreenController extends GetxController {
   void getAllData() async {
     await Future.wait([
       getAllPopularProducts(),
+      getAlLBabyCare(),
     ]).then((value) {
       //print("Data");
       //print(popularProducts[0].product_image);
@@ -38,6 +40,14 @@ class HomeScreenController extends GetxController {
       popularProducts = value.docs
           .map((e) =>
           PopularProductModel.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
+  Future<void> getAlLBabyCare() async {
+    await _firestore.collection('BabyCare').get().then((value) {
+      babyCare = value.docs
+          .map((e) =>
+          BabyCareModel.fromJson(e.data() as Map<String, dynamic>))
           .toList();
     });
   }

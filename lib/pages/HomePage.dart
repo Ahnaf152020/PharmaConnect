@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/Contains/BabyCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
 import 'package:pharmaconnectbyturjo/pages/SearchPage.dart';
 import 'package:pharmaconnectbyturjo/pages/searchscreen.dart';
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,26 +39,27 @@ class _HomePageState extends State<HomePage> {
                         contentPadding: EdgeInsets.all(10),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
-
                         ),
                       ),
                       onTap: () => Navigator.push(context,
                           CupertinoPageRoute(builder: (_) => SearchScreen())),
                     ),
                   ),
-        GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, 'NotificationHome');
-            },
-
-                  child:Container(
-                    child: Image.asset(
-                      "assets/icon/Notification.png",
-                      height: 30,
-                      fit: BoxFit.cover,
+                  SizedBox(
+                    width: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'NotificationHome');
+                    },
+                    child: Container(
+                      child: Image.asset(
+                        "assets/icon/Notification.png",
+                        height: 30,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-        ),
                   SizedBox(
                     width: 20,
                   ),
@@ -107,8 +107,10 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => PersonalCare()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PersonalCare()));
                       // traverse personal care page
                       // Navigator.pushNamed(context, 'PersonalCare');
                     },
@@ -131,7 +133,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => BabyCare()));
 
                       //Baby care
                     },
@@ -156,7 +159,6 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       //Surgical product
                       Navigator.pushNamed(context, 'SurgicalProduct');
-
                     },
                     child: Column(
                       children: [
@@ -185,7 +187,6 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-
                       //women care
                     },
                     child: Column(
@@ -207,7 +208,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-
                       //Dental Care
                     },
                     child: Column(
@@ -248,17 +248,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Popular Products",
-                      style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-
-                  ]),
+              SizedBox(
+                height: 20,
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text(
+                  "Popular Products",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ]),
               PopularProduct(),
             ],
           ),

@@ -1,190 +1,179 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pharmaconnectbyturjo/Contains/BabyCareModel.dart';
+import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 
-
-class BabyProduct extends StatefulWidget {
-  const BabyProduct({Key? key}) : super(key: key);
+class BabyCare extends StatefulWidget {
+  const BabyCare({Key? key}) : super(key: key);
 
   @override
-  State<BabyProduct> createState() => _BabyProductState();
+  State<BabyCare> createState() => _BabyCareState();
 }
 
-class _BabyProductState extends State<BabyProduct> {
-  final List<Map<String, dynamic>> BabyCare = [
-    {
-      "product_id": 1,
-      "title": "Clungene Covid-19 Rapid Antigen Test KitSARS-CoV-2",
-      "product_type": "",
-      "price": "\u09f3699.00",
-      "images": "assets/Medicine/1.png"
-    },
-    {
-      "product_id": 2,
-      "title": "Alcohol Pad",
-      "product_type": "Surgical Kit",
-      "price": "\u09f372.00",
-      "images": "assets/Medicine/2.png"
-    },
-    {
-      "product_id": 3,
-      "title": "Rossmax Fingertip Pulse Oximeter SB-100SB-100",
-      "product_type": "",
-      "price": "\u09f33080.00",
-      "images": "assets/Medicine/3.png"
-    },
-    {
-      "product_id": 4,
-      "title": "Baby Face Mask1s",
-      "product_type": "Surgical Kit",
-      "price": 0,
-      "images": "assets/Medicine/4.png"
-    },
-    {
-      "product_id": 5,
-      "title": "Thermometer Digital Flexible TipFlexible Tip",
-      "product_type": "",
-      "price": "\u09f3120.00",
-      "images": "assets/Medicine/5.png"
-    },
-    {
-      "product_id": 6,
-      "title": "Sepnil Face MaskBlue Color",
-      "product_type": "Square Toiletries Limited",
-      "price": "\u09f3280.00",
-      "images": "assets/Medicine/6.png"
-    },
-    {
-      "product_id": 7,
-      "title": "Turaag ProteX Three Layered Face Protection Mask For MenAntiviral High Performance Face Mask",
-      "product_type": "Unimed Unihealth Pharmaceuticals Ltd.",
-      "price": "\u09f3160.00",
-      "images": "assets/Medicine/7.png"
-    },
-    {
-      "product_id": 8,
-      "title": "N95 Mask Particulate Respirator Face MaskModel-1860",
-      "product_type": "Surgical Kit",
-      "price": "\u09f3299.00",
-      "images": "assets/Medicine/8.png"
-    },
-    {
-      "product_id": 9,
-      "title": "Paxovir150mg+100mg",
-      "product_type": "Eskayef Pharmaceuticals Ltd.",
-      "price": "\u09f33040.00",
-      "images": "assets/Medicine/9.png"
-    },
-    {
-      "product_id": 10,
-      "title": "Face Shield Glass Type-Smart Protective Safety With Frame(1Pc)",
-      "product_type": "Surgical Kit",
-      "price": 0,
-      "images": "assets/Medicine/10.png"
-    },
-
-
-
-
-  ];
+class _BabyCareState extends State<BabyCare> {
+  final FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body:SingleChildScrollView(
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12.0,
-          mainAxisSpacing: 12.0,
-          mainAxisExtent: 270,
-        ),
-        itemCount: BabyCare.length,
-        itemBuilder: (_, index) {
+    final controller = Get.put(HomeScreenController());
 
-          return SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  16.0,
-                ),
-                color: const Color(0xFFFFECDF),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16.0),
-                      topRight: Radius.circular(16.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Image.asset(
-                        BabyCare.elementAt(index)['images'],
-                        height: 130,
-                        fit: BoxFit.cover,
+    return GetBuilder<HomeScreenController>(
+      builder: (value) {
+        if (value.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          List<BabyCareModel> BabyCares = value.babyCare;
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Baby Care'),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        prefixIcon: Icon(Icons.search),
+                        contentPadding: EdgeInsets.all(10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${BabyCare.elementAt(index)['title']}",
-                          style: Theme.of(context).textTheme.subtitle1!.merge(
-                            const TextStyle(
-                              fontWeight: FontWeight.w700,
+
+                    SizedBox(height: 10,),
+                    GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12.0,
+                        mainAxisSpacing: 10.0,
+                        mainAxisExtent: 300,
+                      ),
+                      itemCount: BabyCares.length,
+                      itemBuilder: (_, index) {
+                        BabyCareModel product = BabyCares[index];
+
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFFFFECDF),
+                              ),
+                              gradient:
+                              LinearGradient(begin: Alignment.bottomRight, colors: [
+                                const Color(0xFFAF7A).withOpacity(.8),
+                                const Color(0xFFFFECDF).withOpacity(.0)]),
+
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFFFFECDF),
+                                  blurRadius: 2.0,
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(16.0),
+                              color: const Color(0xFFFFECDF),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 150,
+                                    width: double.infinity,
+                                    child: Image.network(product.product_image),
+                                  ),
+                                  Expanded(
+                                    child: Divider(
+                                      thickness: 1,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Flexible(
+                                    flex: 2,
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 10.0, right: 10),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              "${product.product_name}",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle1!
+                                                  .merge(
+                                                const TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          Text(
+                                            "Price: ${product.product_price}৳",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle2!
+                                                .merge(
+                                              TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black54,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 0, right: 0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            CupertinoIcons.heart,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            CupertinoIcons.shopping_cart,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          "${BabyCare.elementAt(index)['price']}",
-                          style: Theme.of(context).textTheme.subtitle2!.merge(
-                            TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 00, right: 00),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            CupertinoIcons.heart,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            CupertinoIcons.cart,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
-        },
-      ),
-    )
+        }
+      },
     );
   }
 }
-
