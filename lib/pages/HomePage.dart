@@ -4,6 +4,7 @@ import 'package:pharmaconnectbyturjo/Contains/BabyCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+import 'package:pharmaconnectbyturjo/Contains/WomenCare.dart';
 import 'package:pharmaconnectbyturjo/pages/SearchPage.dart';
 import 'package:pharmaconnectbyturjo/pages/searchscreen.dart';
 
@@ -186,9 +187,8 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      //women care
-                    },
+                    onTap: () => Navigator.push(context,
+                        CupertinoPageRoute(builder: (_) => WomenCare())),
                     child: Column(
                       children: [
                         Container(

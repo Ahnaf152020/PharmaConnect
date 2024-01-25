@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharmaconnectbyturjo/Contains/BabyCareModel.dart';
+import 'package:pharmaconnectbyturjo/Model/BabyCareModel.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
 

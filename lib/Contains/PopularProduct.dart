@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
-import 'package:pharmaconnectbyturjo/Contains/PopularProductModel.dart';
+import 'package:pharmaconnectbyturjo/Model/PopularProductModel.dart';
 
 class PopularProduct extends StatefulWidget {
   const PopularProduct({Key? key}) : super(key: key);

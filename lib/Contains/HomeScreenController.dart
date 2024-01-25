@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:pharmaconnectbyturjo/Contains/BabyCareModel.dart';
-import 'package:pharmaconnectbyturjo/Contains/PopularProductModel.dart';
+import 'package:pharmaconnectbyturjo/Model/BabyCareModel.dart';
+import 'package:pharmaconnectbyturjo/Model/PopularProductModel.dart';
+import 'package:pharmaconnectbyturjo/Model/SurgicalProductModel.dart';
+import 'package:pharmaconnectbyturjo/Model/WomenCareModel.dart';
 
 import '../toast.dart';
 
@@ -10,6 +12,8 @@ class HomeScreenController extends GetxController {
 
   late List<PopularProductModel> popularProducts;
   late List<BabyCareModel> babyCare;
+  late List<SurgicalProductModel> surgicalProduct;
+  late List<WomenCareModel> WomenCare;
   List<PopularProductModel> searchResults = [];
 
   bool isSearchLoading = false;
@@ -27,6 +31,8 @@ class HomeScreenController extends GetxController {
     await Future.wait([
       getAllPopularProducts(),
       getAlLBabyCare(),
+      getAllSurgicalProduct(),
+      getAlLWomenCare()
     ]).then((value) {
       //print("Data");
       //print(popularProducts[0].product_image);
@@ -43,6 +49,22 @@ class HomeScreenController extends GetxController {
           .toList();
     });
   }
+  Future<void> getAlLWomenCare() async {
+    await _firestore.collection('WomenCare').get().then((value) {
+      WomenCare = value.docs
+          .map((e) =>
+          WomenCareModel.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
+  Future<void> getAllSurgicalProduct() async {
+    await _firestore.collection('SurgicalProduct').get().then((value) {
+      surgicalProduct = value.docs
+          .map((e) =>
+          SurgicalProductModel.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
   Future<void> getAlLBabyCare() async {
     await _firestore.collection('BabyCare').get().then((value) {
       babyCare = value.docs
@@ -51,6 +73,7 @@ class HomeScreenController extends GetxController {
           .toList();
     });
   }
+
   Future <void> searchProducts(String query) async {
     isSearchLoading = true;
     update();

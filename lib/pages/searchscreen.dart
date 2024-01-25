@@ -12,9 +12,12 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Search Your Grocery'),
+      ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(right: 20.0,left: 20.0),
           child: Column(
             children: [
               TextFormField(
@@ -54,16 +57,19 @@ class _SearchScreenState extends State<SearchScreen> {
                               .contains(inputText.toLowerCase()))
                           .toList();
 
-                      return ListView(
-                        children: filteredProducts
-                            .map((DocumentSnapshot document) {
-                          Map<String, dynamic> data =
-                          document.data() as Map<String, dynamic>;
-                          return CustomProductCard(
-                            productName: data['product_name'],
-                            productImage: data['product_image'],
-                          );
-                        }).toList(),
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: ListView(
+                          children: filteredProducts
+                              .map((DocumentSnapshot document) {
+                            Map<String, dynamic> data =
+                            document.data() as Map<String, dynamic>;
+                            return CustomProductCard(
+                              productName: data['product_name'],
+                              productImage: data['product_image'],
+                            );
+                          }).toList(),
+                        ),
                       );
                     },
                   ),
