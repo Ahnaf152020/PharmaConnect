@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Contains/BabyCareModel.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
+import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
 
 class BabyCare extends StatefulWidget {
   const BabyCare({Key? key}) : super(key: key);
@@ -13,7 +14,32 @@ class BabyCare extends StatefulWidget {
 }
 
 class _BabyCareState extends State<BabyCare> {
+  List _Babycare = [];
   final FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
+  fetchProducts() async {
+    QuerySnapshot qn = await _firestoreInstance.collection("BabyCare").get();
+    setState(() {
+      for (int i = 0; i < qn.docs.length; i++) {
+        _Babycare.add({
+          "product_name": qn.docs[i]["product_name"],
+          "product_description": qn.docs[i]["product_description"],
+          "product_price": (qn.docs[i]["product_price"] as num).toDouble(), // Convert to double
+          "product_image": qn.docs[i]["product_image"],
+        });
+      }
+    });
+
+    return qn.docs;
+  }
+
+
+  @override
+  void initState() {
+    fetchProducts();
+    super.initState();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +73,7 @@ class _BabyCareState extends State<BabyCare> {
                         ),
                       ),
                     ),
+
 
                     SizedBox(height: 10,),
                     GridView.builder(
@@ -152,7 +179,20 @@ class _BabyCareState extends State<BabyCare> {
                                           ),
                                         ),
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (_) => ProductDetails(
+                                                  productName: _Babycare[index]["product_name"],
+                                                  productImage: _Babycare[index]["product_image"],
+                                                  productPrice: (_Babycare[index]["product_price"] as num).toDouble(),
+                                                  productDescription: _Babycare[index]["product_description"],
+                                                ),
+                                              ),
+                                            );
+
+                                          },
                                           icon: const Icon(
                                             CupertinoIcons.shopping_cart,
                                           ),
