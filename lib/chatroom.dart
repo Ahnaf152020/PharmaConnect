@@ -160,13 +160,14 @@ class ChatRoom extends StatelessWidget {
                     .collection('chatroom')
                     .doc(chatRoomId)
                     .collection('chats')
-                    .orderBy("time", descending: false)
+                    .orderBy("time", descending: true)
                     .snapshots(),
 
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.data != null) {
                     return ListView.builder(
+                      reverse: true,
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         Map<String, dynamic> map = snapshot.data!.docs[index]
