@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/BabyCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
+import 'package:pharmaconnectbyturjo/Contains/DentalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
 import 'package:pharmaconnectbyturjo/Contains/WomenCare.dart';
@@ -208,7 +209,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      //Dental Care
+                       Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => DentalProduct()));
                     },
                     child: Column(
                       children: [
@@ -223,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                           child: Image.asset("assets/icon/floss.png"),
                         ),
                         const SizedBox(height: 4),
-                        Text("Detal\nCare", textAlign: TextAlign.center)
+                        Text("Dental\nCare", textAlign: TextAlign.center)
                       ],
                     ),
                   ),

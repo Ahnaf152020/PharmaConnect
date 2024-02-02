@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class ProductDetails extends StatelessWidget {
   final String productName;
@@ -12,6 +16,33 @@ class ProductDetails extends StatelessWidget {
     required this.productPrice,
     required this.productDescription,
   });
+
+  void addToCart() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String userId = user.uid; // Use UID as the identifier
+
+      // Save product information to Firestore under the user's cart
+      await FirebaseFirestore.instance.collection('carts').doc(userId).collection('items').add({
+        'product_name': productName,
+        'product_image': productImage,
+        'product_price': productPrice,
+        'product_description': productDescription,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      Fluttertoast.showToast(
+        msg: 'Product added to cart',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+      );
+      // You can add additional logic or show a success message here
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +77,10 @@ class ProductDetails extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
+                onPressed: addToCart,
                 // TODO: Implement "Add to Cart" logic
                 // You can add your cart logic here
                 // For example, you might want to add the product to a shopping cart state
-              },
               child: Text('Add to Cart'),
             ),
           ],

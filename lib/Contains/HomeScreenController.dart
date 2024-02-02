@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Model/BabyCareModel.dart';
+import 'package:pharmaconnectbyturjo/Model/DentalCareModel.dart';
 import 'package:pharmaconnectbyturjo/Model/PopularProductModel.dart';
 import 'package:pharmaconnectbyturjo/Model/SurgicalProductModel.dart';
 import 'package:pharmaconnectbyturjo/Model/WomenCareModel.dart';
@@ -14,6 +15,7 @@ class HomeScreenController extends GetxController {
   late List<BabyCareModel> babyCare;
   late List<SurgicalProductModel> surgicalProduct;
   late List<WomenCareModel> WomenCare;
+  late List<DentalCareModel> dentalcare;
   List<PopularProductModel> searchResults = [];
 
   bool isSearchLoading = false;
@@ -32,7 +34,8 @@ class HomeScreenController extends GetxController {
       getAllPopularProducts(),
       getAlLBabyCare(),
       getAllSurgicalProduct(),
-      getAlLWomenCare()
+      getAlLWomenCare(),
+      getAllDentalCare()
     ]).then((value) {
       //print("Data");
       //print(popularProducts[0].product_image);
@@ -70,6 +73,15 @@ class HomeScreenController extends GetxController {
       babyCare = value.docs
           .map((e) =>
           BabyCareModel.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
+
+  Future<void> getAllDentalCare() async {
+    await _firestore.collection('DentalCare').get().then((value) {
+      dentalcare = value.docs
+          .map((e) =>
+          DentalCareModel.fromJson(e.data() as Map<String, dynamic>))
           .toList();
     });
   }
