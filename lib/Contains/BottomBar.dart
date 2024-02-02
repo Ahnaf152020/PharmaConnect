@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/pages/HomePage.dart';
 import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
+import 'package:pharmaconnectbyturjo/pages/cart.dart';
 import 'package:pharmaconnectbyturjo/widget.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -14,7 +15,7 @@ class _MyBottomBarState extends State<MyBottomBar> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Mywidget(),
+    cart(),
     Mywidget(),
     AccountScreen(),
   ];

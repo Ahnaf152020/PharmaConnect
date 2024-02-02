@@ -16,7 +16,7 @@ class ProductDetails extends StatelessWidget {
     required this.productPrice,
     required this.productDescription,
   });
-
+/*
   void addToCart() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -24,6 +24,32 @@ class ProductDetails extends StatelessWidget {
 
       // Save product information to Firestore under the user's cart
       await FirebaseFirestore.instance.collection('carts').doc(userId).collection('items').add({
+        'product_name': productName,
+        'product_image': productImage,
+        'product_price': productPrice,
+        'product_description': productDescription,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      Fluttertoast.showToast(
+        msg: 'Product added to cart',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+      );
+      // You can add additional logic or show a success message here
+    }
+  }
+
+*/
+  void addToCart() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String userEmail = user.email!; // Use user's email as the identifier
+
+      // Save product information to Firestore under the user's cart
+      await FirebaseFirestore.instance.collection('carts').doc(userEmail).collection('items').add({
         'product_name': productName,
         'product_image': productImage,
         'product_price': productPrice,
