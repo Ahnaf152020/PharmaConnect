@@ -39,6 +39,15 @@ class _BabyCareState extends State<BabyCare> {
     super.initState();
   }
 
+  void addToCart(String productName, String productImage, double productPrice, String productDescription) {
+    ProductActions.addToCart(
+      productName: productName,
+      productImage: productImage,
+      productPrice: productPrice,
+      productDescription: productDescription,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeScreenController());
@@ -191,11 +200,7 @@ class _BabyCareState extends State<BabyCare> {
                                             ),
                                           ),
                                           IconButton(
-                                            onPressed: () {
-
-
-                                              // Handle the shopping cart button press if needed
-                                            },
+                                            onPressed: addToCart
                                             icon: const Icon(
                                               CupertinoIcons.shopping_cart,
                                             ),
