@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Container(
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
-                        .collection("PopularProducts")
+                        .collection("Products")
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -96,9 +97,13 @@ class CustomProductCard extends StatelessWidget {
       child: ListTile(
         title: Text(productName),
         leading: SizedBox(
-          width: 50, // Set a fixed width for the leading widget
+          width: 50,
           child: Image.network(productImage),
         ),
+        onTap: () {
+          // Navigate to the ProductDetails screen when the card is tapped
+        Navigator.pushNamed(context, 'productdetails');
+        },
       ),
     );
   }
