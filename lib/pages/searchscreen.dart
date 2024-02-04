@@ -1,3 +1,4 @@
+// SearchScreen
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
@@ -14,11 +15,11 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Your Grocery'),
+        title: Text('Search Your items'),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(right: 20.0,left: 20.0),
+          padding: const EdgeInsets.only(right: 20.0, left: 20.0),
           child: Column(
             children: [
               TextFormField(
@@ -68,6 +69,10 @@ class _SearchScreenState extends State<SearchScreen> {
                             return CustomProductCard(
                               productName: data['product_name'],
                               productImage: data['product_image'],
+                             // productPrice: (data['product_price'] as num?)?.toDouble(),
+                              // Convert to double
+                              productPrice: 0.0,
+                              productDescription: data['product_description'] ?? '',
                             );
                           }).toList(),
                         ),
@@ -84,26 +89,48 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
+// CustomProductCard
 class CustomProductCard extends StatelessWidget {
   final String productName;
   final String productImage;
+  final double? productPrice; // Use double? to allow null
+  final String productDescription;
 
-  CustomProductCard({required this.productName, required this.productImage});
+  CustomProductCard({
+    required this.productName,
+    required this.productImage,
+    required this.productPrice,
+    required this.productDescription,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: ListTile(
-        title: Text(productName),
-        leading: SizedBox(
-          width: 50,
-          child: Image.network(productImage),
+    return GestureDetector(
+      onTap: () {
+        // Navigate to the ProductDetails screen when the card is tapped
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetails(
+              productName: productName,
+              productImage: productImage,
+              productPrice: (productPrice ?? 0.0).toDouble(), // Explicitly cast to double or provide a default value if null
+              productDescription: productDescription,
+            ),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 5,
+        child: ListTile(
+          title: Text(productName),
+          leading: SizedBox(
+            width: 50,
+            child: Image.network(productImage),
+
+
+          ),
         ),
-        onTap: () {
-          // Navigate to the ProductDetails screen when the card is tapped
-        Navigator.pushNamed(context, 'productdetails');
-        },
       ),
     );
   }

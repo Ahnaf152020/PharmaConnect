@@ -147,93 +147,98 @@ class _ProductDetailsState extends State<ProductDetails> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(40.0),
               child: Center(
                 child: Container(
                   height: 250,
-                  // width: double.infinity,
                   child: Image.network(widget.productImage, fit: BoxFit.cover),
                 ),
               ),
             ),
             SizedBox(height: 16),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 10,
+                    spreadRadius: 0.0,
+                    offset: Offset(
+                      -2.0,
+                      -2.0,
+                    ),
+                  )
+                ],
+              ),
+              padding: EdgeInsets.only(top: 25, right: 20, left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Product Name: ${widget.productName}',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 10,
-                      spreadRadius: 0.0,
-                      offset:
-                          Offset(-2.0, -2.0), // shadow direction: bottom right
-                    )
-                  ],
-                ),
-                padding: EdgeInsets.only(top: 25, right: 20, left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Product Name: ${widget.productName}',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  SizedBox(height: 8),
+                  Text(
+                    'Product Price: ${widget.productPrice}৳',
+                    style: TextStyle(fontSize: 15, color: Colors.blue),
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(
+                    height: 200, // Adjust the height as needed
+                    child: ListView(
+                      children: [
+                        Text(
+                          "${widget.productDescription}",
+                          textAlign: TextAlign.justify,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .merge(const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          )),
+                          maxLines: 6,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Product Price: ${widget.productPrice}৳',
-                      style: TextStyle(fontSize: 15, color: Colors.blue),
-                    ),
-                    Divider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                    Expanded(
-                      child: Text(
-                        "${widget.productDescription}",textAlign: TextAlign.justify,
-                        style: Theme.of(context).textTheme.subtitle1!.merge(
-                              const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                        maxLines: 6,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: addToCart,
-                            child: Text('Add to Cart'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: addToCart,
+                          child: Text('Add to Cart'),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            if (isFavorite) {
+                              removeFromFavorite();
+                            } else {
+                              addtofavourite();
+                            }
+                          },
+                          icon: Icon(
+                            isFavorite
+                                ? CupertinoIcons.heart_fill
+                                : CupertinoIcons.heart,
                           ),
-                          IconButton(
-                            onPressed: () {
-                              if (isFavorite) {
-                                removeFromFavorite();
-                              } else {
-                                addtofavourite();
-                              }
-                            },
-                            icon: Icon(
-                              isFavorite
-                                  ? CupertinoIcons.heart_fill
-                                  : CupertinoIcons.heart,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
