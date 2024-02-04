@@ -162,18 +162,17 @@ class _ProductDetailsState extends State<ProductDetails> {
       body: Padding(
         padding: const EdgeInsets.all(0.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(40.0),
+            Expanded(
               child: Center(
                 child: Container(
-                  height: 250,
+                  height: 200,
                   child: Image.network(widget.productImage, fit: BoxFit.cover),
                 ),
               ),
             ),
-            SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -195,101 +194,142 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               padding: EdgeInsets.only(top: 25, right: 20, left: 20),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Product Name: ${widget.productName}',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Product Price: ${widget.productPrice}৳',
-                    style: TextStyle(fontSize: 15, color: Colors.blue),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Product Price: ${widget.productPrice}৳',
+                        style: TextStyle(fontSize: 15, color: Colors.blue,fontStyle: FontStyle.italic),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          if (isFavorite) {
+                            removeFromFavorite();
+                          } else {
+                            addtofavourite();
+                          }
+                        },
+                        icon: Icon(
+                          isFavorite
+                              ? CupertinoIcons.heart_fill
+                              : CupertinoIcons.heart,
+                        ),
+                      ),
+                    ],
                   ),
                   Divider(
                     thickness: 1,
                     color: Colors.grey,
                   ),
-                  SizedBox(
-                    height: 200, // Adjust the height as needed
-                    child: ListView(
-                      children: [
-                        Text(
-                          "${widget.productDescription}",
-                          textAlign: TextAlign.justify,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .merge(const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          )),
-                          maxLines: 6,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          onPressed: addToCart,
-                          child: Text('Add to Cart'),
-                        ),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () => decrementQuantity(),
-                              icon: Icon(Icons.remove),
-                            ),
-                            Text('$quantity'),
-                            IconButton(
-                              onPressed: () => incrementQuantity(),
-                              icon: Icon(Icons.add),
-                            ),
-                          ],
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BuyNow(
-                                  productName: widget.productName,
-                                  productImage: widget.productImage,
-                                  productPrice: widget.productPrice,
-                                  quantity: quantity,
+                  // Adjust the height as needed
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${widget.productDescription}",
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .merge(const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            )),
+                        maxLines: 6,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 50),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15, left: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Quantity',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.lineThrough,
+                                      fontStyle: FontStyle.italic),
                                 ),
-                              ),
-                            );
-
-                            // Handle Buy Now functionality
-                            // You can use the quantity and total amount here
-                            // to proceed with the purchase.
-                          },
-                          child: Text('Buy Now'),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            if (isFavorite) {
-                              removeFromFavorite();
-                            } else {
-                              addtofavourite();
-                            }
-                          },
-                          icon: Icon(
-                            isFavorite
-                                ? CupertinoIcons.heart_fill
-                                : CupertinoIcons.heart,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 18,
+                                      backgroundColor: Colors.black12,
+                                      child: IconButton(
+                                        iconSize: 20,
+                                        onPressed: () => decrementQuantity(),
+                                        icon: Icon(Icons.remove),
+                                      ),
+                                    ),
+                                    SizedBox(width: 15),
+                                    Text(
+                                      '$quantity',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    SizedBox(width: 15),
+                                    CircleAvatar(
+                                      radius: 18,
+                                      backgroundColor: Colors.black12,
+                                      child: IconButton(
+                                        iconSize: 20,
+                                        onPressed: () => incrementQuantity(),
+                                        icon: Icon(Icons.add),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                          SizedBox(height: 30),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: addToCart,
+                                  child: Text('Add to Cart'),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BuyNow(
+                                          productName: widget.productName,
+                                          productImage: widget.productImage,
+                                          productPrice: widget.productPrice,
+                                          quantity: quantity,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('Buy Now'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ],
               ),
