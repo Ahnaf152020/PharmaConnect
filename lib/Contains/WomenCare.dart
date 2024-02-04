@@ -142,9 +142,9 @@ class _WomenCareState extends State<WomenCare> {
                                     Flexible(
                                       flex: 2,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 10.0, right: 10),
+                                        padding:
+                                        const EdgeInsets.only(left: 10.0, right: 10, bottom: 10),
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
@@ -162,7 +162,7 @@ class _WomenCareState extends State<WomenCare> {
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            Text(
+                                            Expanded(child: Text(
                                               "Price: ${product.product_price}৳",
                                               style: Theme.of(context)
                                                   .textTheme
@@ -173,31 +173,9 @@ class _WomenCareState extends State<WomenCare> {
                                                   color: Colors.black54,
                                                 ),
                                               ),
-                                            ),
+                                            ),)
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 0, right: 0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              CupertinoIcons.heart,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              // Remove navigation from here
-                                            },
-                                            icon: const Icon(
-                                              CupertinoIcons.shopping_cart,
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ),
                                   ],

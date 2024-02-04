@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Model/BabyCareModel.dart';
+
 import 'package:pharmaconnectbyturjo/Model/DentalCareModel.dart';
+import 'package:pharmaconnectbyturjo/Model/PersonalCareModel.dart';
 import 'package:pharmaconnectbyturjo/Model/PopularProductModel.dart';
 import 'package:pharmaconnectbyturjo/Model/SurgicalProductModel.dart';
 import 'package:pharmaconnectbyturjo/Model/WomenCareModel.dart';
@@ -12,6 +14,7 @@ class HomeScreenController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   late List<PopularProductModel> popularProducts;
+  late List<PersonalCareModel> PersonalCare;
   late List<BabyCareModel> babyCare;
   late List<SurgicalProductModel> surgicalProduct;
   late List<WomenCareModel> WomenCare;
@@ -32,6 +35,7 @@ class HomeScreenController extends GetxController {
   void getAllData() async {
     await Future.wait([
       getAllPopularProducts(),
+      getAllPersonalCare(),
       getAlLBabyCare(),
       getAllSurgicalProduct(),
       getAlLWomenCare(),
@@ -49,6 +53,14 @@ class HomeScreenController extends GetxController {
       popularProducts = value.docs
           .map((e) =>
           PopularProductModel.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
+  Future<void> getAllPersonalCare() async {
+    await _firestore.collection('PersonalCare').get().then((value) {
+      PersonalCare = value.docs
+          .map((e) =>
+          PersonalCareModel.fromJson(e.data() as Map<String, dynamic>))
           .toList();
     });
   }

@@ -145,9 +145,8 @@ class _SurgicalProductState extends State<SurgicalProduct> {
                                       flex: 2,
                                       child: Padding(
                                         padding:
-                                        const EdgeInsets.only(left: 10.0, right: 10),
+                                        const EdgeInsets.only(left: 10.0, right: 10, bottom: 10),
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
@@ -165,7 +164,7 @@ class _SurgicalProductState extends State<SurgicalProduct> {
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            Text(
+                                            Expanded(child: Text(
                                               "Price: ${product.product_price}৳",
                                               style: Theme.of(context)
                                                   .textTheme
@@ -176,31 +175,9 @@ class _SurgicalProductState extends State<SurgicalProduct> {
                                                   color: Colors.black54,
                                                 ),
                                               ),
-                                            ),
+                                            ),)
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 0, right: 0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              CupertinoIcons.heart,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              // Handle the shopping cart button press if needed
-                                            },
-                                            icon: const Icon(
-                                              CupertinoIcons.shopping_cart,
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ),
                                   ],
