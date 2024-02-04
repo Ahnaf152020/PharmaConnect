@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pharmaconnectbyturjo/BuyNow.dart';
 
 class ProductDetails extends StatefulWidget {
   final String productName;
@@ -23,6 +24,7 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   bool isFavorite = false;
+  int quantity = 1;
 
   @override
   void initState() {
@@ -64,6 +66,8 @@ class _ProductDetailsState extends State<ProductDetails> {
         'product_image': widget.productImage,
         'product_price': widget.productPrice,
         'product_description': widget.productDescription,
+        'quantity': quantity,
+        'total_amount': widget.productPrice * quantity,
         'timestamp': FieldValue.serverTimestamp(),
       });
 
@@ -131,6 +135,20 @@ class _ProductDetailsState extends State<ProductDetails> {
       );
       setState(() {
         isFavorite = false;
+      });
+    }
+  }
+
+  void incrementQuantity() {
+    setState(() {
+      quantity++;
+    });
+  }
+
+  void decrementQuantity() {
+    if (quantity > 1) {
+      setState(() {
+        quantity--;
       });
     }
   }
@@ -220,6 +238,41 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ElevatedButton(
                           onPressed: addToCart,
                           child: Text('Add to Cart'),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () => decrementQuantity(),
+                              icon: Icon(Icons.remove),
+                            ),
+                            Text('$quantity'),
+                            IconButton(
+                              onPressed: () => incrementQuantity(),
+                              icon: Icon(Icons.add),
+                            ),
+                          ],
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BuyNow(
+                                  productName: widget.productName,
+                                  productImage: widget.productImage,
+                                  productPrice: widget.productPrice,
+                                  quantity: quantity,
+                                ),
+                              ),
+                            );
+
+                            // Handle Buy Now functionality
+                            // You can use the quantity and total amount here
+                            // to proceed with the purchase.
+                          },
+                          child: Text('Buy Now'),
                         ),
                         IconButton(
                           onPressed: () {
