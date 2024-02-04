@@ -21,6 +21,8 @@ class BuyNow extends StatefulWidget {
 
 class _BuyNowState extends State<BuyNow> {
   String userAddress = "";
+  late String userName; // Declare user name
+  late String userEmail; // Declare user email
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +75,8 @@ class _BuyNowState extends State<BuyNow> {
                 }
 
                 var userData = snapshot.data as DocumentSnapshot;
-                var userName = userData['user name'];
-                var userEmail = userData['e-mail'];
+                userName = userData['user name']; // Assign user name
+                userEmail = userData['e-mail']; // Assign user email
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +118,7 @@ class _BuyNowState extends State<BuyNow> {
                   await FirebaseFirestore.instance
                       .collection('orders')
                       .doc(user.uid)
-                      .collection('items')
+                      .collection('itemso')
                       .add({
                     'product_name': widget.productName,
                     'product_image': widget.productImage,
@@ -124,6 +126,8 @@ class _BuyNowState extends State<BuyNow> {
                     'quantity': widget.quantity,
                     'total_amount': totalAmount,
                     'user_address': userAddress,
+                    'user name': userName, // Add user name
+                    'e-mail': userEmail, // Add user email
                     'timestamp': FieldValue.serverTimestamp(),
                   });
 

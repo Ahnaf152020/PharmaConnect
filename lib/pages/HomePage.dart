@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/AdminPanel.dart';
 import 'package:pharmaconnectbyturjo/Contains/BabyCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/Contains/DentalCare.dart';
@@ -230,7 +231,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => AdminPanel()));
+                    },
                     child: Column(
                       children: [
                         Container(
