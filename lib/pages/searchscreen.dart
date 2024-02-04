@@ -51,13 +51,23 @@ class _SearchScreenState extends State<SearchScreen> {
                         );
                       }
 
-                      var filteredProducts = snapshot.data!.docs
+                      /*var filteredProducts = snapshot.data!.docs
                           .where((document) =>
                           document['product_name']
                               .toString()
                               .toLowerCase()
                               .contains(inputText.toLowerCase()))
+                          .toList();*/
+                      var filteredProducts = snapshot.data!.docs
+                          .where((document) =>
+                      document['product_name']
+                          .toString()
+                          .toLowerCase()
+                          .contains(inputText.toLowerCase()))
+                          /*&&
+                          document['product_price'] != null)*/
                           .toList();
+
 
                       return Padding(
                         padding: const EdgeInsets.only(top: 15),
@@ -66,14 +76,28 @@ class _SearchScreenState extends State<SearchScreen> {
                               .map((DocumentSnapshot document) {
                             Map<String, dynamic> data =
                             document.data() as Map<String, dynamic>;
-                            return CustomProductCard(
-                              productName: data['product_name'],
-                              productImage: data['product_image'],
-                             // productPrice: (data['product_price'] as num?)?.toDouble(),
-                              // Convert to double
-                              productPrice: 0.0,
-                              productDescription: data['product_description'] ?? '',
-                            );
+
+
+
+                            if (data['product_price'] != null && data['product_price'] is num) {
+                              return CustomProductCard(
+                                productName: data['product_name'],
+                                productImage: data['product_image'],
+                                productPrice: (data['product_price'] as num).toDouble(),
+                                productDescription: data['product_description'] ?? '',
+                              );}
+                      else {
+                              // Handle the case where 'product_price' is missing or not a valid number
+                              print("Warning: 'product_price' field missing or invalid in document");
+                              // You might want to return a placeholder or handle it differently
+                              return CustomProductCard(
+                                productName: data['product_name'],
+                                productImage: data['product_image'],
+                                productPrice: 0.0, // or any default value
+                                productDescription: data['product_description'] ?? '',
+                              );
+                            }
+
                           }).toList(),
                         ),
                       );
@@ -114,7 +138,8 @@ class CustomProductCard extends StatelessWidget {
             builder: (context) => ProductDetails(
               productName: productName,
               productImage: productImage,
-              productPrice: (productPrice ?? 0.0).toDouble(), // Explicitly cast to double or provide a default value if null
+              productPrice: (productPrice ?? 0.0).toDouble(),
+// Explicitly cast to double or provide a default value if null
               productDescription: productDescription,
             ),
           ),
