@@ -23,6 +23,7 @@ class _BuyNowState extends State<BuyNow> {
   String userAddress = "";
   late String userName; // Declare user name
   late String userEmail; // Declare user email
+  String selectedPaymentMethod = 'COD'; // Default payment method
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +112,26 @@ class _BuyNowState extends State<BuyNow> {
               ),
             ),
             SizedBox(height: 16),
+            Text(
+              'Payment Method:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            DropdownButton<String>(
+              value: selectedPaymentMethod,
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedPaymentMethod = newValue!;
+                });
+              },
+              items: <String>['COD', 'Online Payment']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
                 if (user != null) {
@@ -128,6 +149,7 @@ class _BuyNowState extends State<BuyNow> {
                     'user_address': userAddress,
                     'user name': userName, // Add user name
                     'e-mail': userEmail, // Add user email
+                    'payment_method': selectedPaymentMethod, // Add payment method
                     'timestamp': FieldValue.serverTimestamp(),
                   });
 
@@ -138,8 +160,13 @@ class _BuyNowState extends State<BuyNow> {
                     ),
                   );
 
-                  // Navigate back to the product details page
-                  Navigator.pop(context);
+                  if (selectedPaymentMethod == 'COD') {
+                    // Navigate back to the homepage
+                    Navigator.pop(context);
+                  } else {
+                    // Navigate to the homepage
+                    Navigator.pushReplacementNamed(context, '/');
+                  }
                 }
               },
               child: Text('Place Order'),

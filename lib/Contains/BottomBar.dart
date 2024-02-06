@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/MyOrderDetails.dart';
 import 'package:pharmaconnectbyturjo/pages/HomePage.dart';
 import 'package:pharmaconnectbyturjo/pages/Update_Profile.dart';
 import 'package:pharmaconnectbyturjo/pages/cart.dart';
@@ -17,7 +18,8 @@ class _MyBottomBarState extends State<MyBottomBar> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     cart(),
-    favourite(),
+    MyOrderDetails(),
+    //favourite(),
     AccountScreen(),
   ];
 

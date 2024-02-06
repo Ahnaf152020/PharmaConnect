@@ -51,12 +51,11 @@ class _AdminPanelState extends State<AdminPanel> {
             );
           }
 
-          var orders = snapshot.data!.docs;
-
           return ListView.builder(
-            itemCount: orders.length,
-            itemBuilder: (context, index) {
-              var order = orders[index].data() as Map<String, dynamic>;
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (_, index) {
+              DocumentSnapshot _documentSnapshot = snapshot.data!.docs[index];
+              var order = _documentSnapshot.data() as Map<String, dynamic>;
               var productName = order['product_name'];
               var productImage = order['product_image'];
               var productPrice = order['product_price'];
@@ -76,11 +75,40 @@ class _AdminPanelState extends State<AdminPanel> {
                     Text('Total Amount: $totalAmount'),
                     Text('User Address: $userAddress'),
                     Text('User Name: $username'),
-                    Text('User Email: $useremail')
-                    
+                    Text('User Email: $useremail'),
+
                   ],
                 ),
                 leading: Image.network(productImage, height: 50, width: 50),
+                trailing: ElevatedButton(
+
+                    onPressed: () async {
+                      try {
+                        print('Document ID: ${_documentSnapshot.id}');
+                        await FirebaseFirestore.instance
+                            .collection('orders')
+                            .doc(_documentSnapshot.reference.parent.parent!.id) // Go up two levels to the orders document
+                            .collection('itemso')
+                            .doc(_documentSnapshot.id)
+                            .delete();
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Order deleted successfully!'),
+                          ),
+                        );
+                      } catch (e) {
+                        print('Error deleting order: $e');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('An error occurred while deleting the order.'),
+                          ),
+                        );
+                      }
+                    },
+
+                    child: Text('Delete'),
+                ),
               );
             },
           );
