@@ -18,8 +18,8 @@ class _MyBottomBarState extends State<MyBottomBar> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     cart(),
+    favourite(),
     MyOrderDetails(),
-    //favourite(),
     AccountScreen(),
   ];
 
@@ -53,6 +53,11 @@ class _MyBottomBarState extends State<MyBottomBar> {
             icon: Icon(Icons.favorite_sharp),
 
             label: 'Favourite',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop_2),
+
+            label: 'My Order',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

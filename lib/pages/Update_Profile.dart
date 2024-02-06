@@ -9,6 +9,8 @@ import 'package:ionicons/ionicons.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path/path.dart' as Path  ;
 import "package:iconsax/iconsax.dart";
+import 'package:pharmaconnectbyturjo/AdminPanel.dart';
+import 'package:pharmaconnectbyturjo/pages/LoginPage.dart';
 import 'package:pharmaconnectbyturjo/pages/edit_screen.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
 import 'package:pharmaconnectbyturjo/userprofile2.dart';
@@ -105,6 +107,44 @@ class _AccountScreenState extends State<AccountScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    // Image.asset("assets/avatar.png", width: 70, height: 70),
+
+                    const SizedBox(width: 20),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Admin Panel",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Text(
+                          "Only For Admin User",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                    const Spacer(),
+                    ForwardButton(
+                      onTap: () {
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => AdminPanel()));
+                      },
+                    )
+                  ],
+                ),
+              ),
               const SizedBox(height: 40),
               const Text(
                 "Settings",
@@ -158,38 +198,20 @@ class _AccountScreenState extends State<AccountScreen> {
                   );
                 },
               ),
-
-              const SizedBox(height: 50),
-              GestureDetector(
+              const SizedBox(height: 20),
+              SettingItem(
+                title: "Log Out",
+                icon: Ionicons.exit_outline,
+                bgColor: Colors.green.shade100,
+                iconColor: Colors.green,
                 onTap: () {
-                  _auth.signOut();
-                  Navigator.pushNamed(context, 'LoginPage');
-
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(FontAwesomeIcons.signOut, color: Colors.white,),
-                        SizedBox(width: 5,),
-                        Text(
-                          "User SignOut",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
 

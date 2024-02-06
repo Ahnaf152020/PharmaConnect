@@ -52,9 +52,8 @@ class _LoginPageState extends State<LoginPage> {
 
     super.initState();
   }
+
   @override
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -287,22 +286,10 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 20,
               ),
-
               GestureDetector(
-                onTap: (){
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.orange,
-                        ),
-                      );
-                    },
-                  );
+                onTap: () {
                   _signIn();
-
-                  },
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Container(
@@ -359,36 +346,46 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 15,
               ),
-
-                  GestureDetector(
-                    onTap: () {
-                      _signInWithGoogle();
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 45,
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-
-                          ),
-                          child: Center(
-                          child: _isSigning ? CircularProgressIndicator(
-                            color: Colors.white,):Text(
-                            "Sign In With Google",
-
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                      ),
+              // GestureDetector(
+              //   onTap: () {
+              //     _signInWithGoogle();
+              //   },
+              //   child: Container(
+              //     height: 45,
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //     child: Center(
+              //       child: _isSigning
+              //           ? CircularProgressIndicator(
+              //               color: Colors.blue,
+              //             )
+              //           : Image.network(
+              //               'http://pngimg.com/uploads/google/google_PNG19635.png',
+              //               fit: BoxFit.cover),
+              //     ),
+              //   ),
+              // ),
+              GestureDetector(
+                onTap: () {
+                  _signInWithGoogle();
+                },
+                child: Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Image.network(
+                      'http://pngimg.com/uploads/google/google_PNG19635.png',
+                      fit: BoxFit.cover,
                     ),
-                    ),
-
-
-
-              SizedBox( height: 10,),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -421,7 +418,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _signIn() async {
-
     setState(() {
       _isSigning = true;
     });
@@ -436,9 +432,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty) {
       if (user != null) {
-
         showToast(message: "succesfully done signin");
-
 
         Navigator.pushNamed(context, 'MyBottomBar');
       } else {
@@ -449,17 +443,16 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  _signInWithGoogle()async{
-
+  _signInWithGoogle() async {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
 
     try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
 
-      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-
-      if(googleSignInAccount != null ){
-        final GoogleSignInAuthentication googleSignInAuthentication = await
-        googleSignInAccount.authentication;
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
@@ -470,11 +463,8 @@ class _LoginPageState extends State<LoginPage> {
         showToast(message: 'Successfully Signed in ');
         Navigator.pushNamed(context, "HomePage");
       }
-
-    }catch(e) {
+    } catch (e) {
       showToast(message: "some error occured $e");
     }
-
-
   }
 }
