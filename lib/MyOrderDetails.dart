@@ -45,11 +45,21 @@ class MyOrderDetails extends StatelessWidget {
                     itemCount: orderDocs.docs.length,
                     itemBuilder: (context, index) {
                       final orderData =
-                          orderDocs.docs[index].data() as Map<String, dynamic>;
+                      orderDocs.docs[index].data() as Map<String, dynamic>;
                       return ListTile(
+                        leading: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image.network(
+                            orderData['product_image'],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         title: Text(orderData['product_name']),
-                        subtitle: Text('Quantity: ${orderData['quantity']}'),
-                        trailing: Text('Total: ${orderData['total_amount']}৳'),
+                        subtitle:
+                        Text('Quantity: ${orderData['quantity']}'),
+                        trailing:
+                        Text('Total: ${orderData['total_amount']}৳'),
                       );
                     },
                   );

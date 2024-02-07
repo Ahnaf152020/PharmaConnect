@@ -64,6 +64,7 @@ class _AdminPanelState extends State<AdminPanel> {
               var userAddress = order['user_address'];
               var username = order['user name'];
               var useremail = order['e-mail'];
+              var paymentmethod = order['payment_method'];
 
               return ListTile(
                 title: Text('Product: $productName'),
@@ -76,6 +77,7 @@ class _AdminPanelState extends State<AdminPanel> {
                     Text('User Address: $userAddress'),
                     Text('User Name: $username'),
                     Text('User Email: $useremail'),
+                    Text('payment method: $paymentmethod')
 
                   ],
                 ),

@@ -149,6 +149,7 @@ class CustomProductCard extends StatelessWidget {
         elevation: 5,
         child: ListTile(
           title: Text(productName),
+          subtitle: Text('Price: ${productPrice != null ? '\$${productPrice!.toStringAsFixed(2)}' : 'Price not available'}'),
           leading: SizedBox(
             width: 50,
             child: Image.network(productImage),
