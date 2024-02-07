@@ -60,6 +60,7 @@ class _DentalProductState extends State<DentalProduct> {
 
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: Text('Dental Care'),
             ),
             body: SingleChildScrollView(

@@ -10,6 +10,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   var inputText = "";
+  late String userName;
 
   @override
   Widget build(BuildContext context) {

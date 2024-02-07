@@ -55,6 +55,7 @@ class _PersonalCareState extends State<PersonalCare> {
 
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: Text('Baby Care'),
             ),
             body: SingleChildScrollView(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pharmaconnectbyturjo/pages/Payment.dart';
 
 class BuyNow extends StatefulWidget {
   final String productName;
@@ -23,7 +24,7 @@ class _BuyNowState extends State<BuyNow> {
   String userAddress = "";
   late String userName; // Declare user name
   late String userEmail; // Declare user email
-  String selectedPaymentMethod = 'COD'; // Default payment method
+  String selectedPaymentMethod = 'Online Payment'; // Default payment method
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class _BuyNowState extends State<BuyNow> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Buy Now'),
       ),
       body: SingleChildScrollView(
@@ -184,6 +186,7 @@ class _BuyNowState extends State<BuyNow> {
                       SnackBar(
                         //content: Text('Order placed successfully!'),
                         content: Center(child: Text('Saved Your Order')),
+                        behavior: SnackBarBehavior.floating,
                       ),
                     );
 
@@ -191,8 +194,15 @@ class _BuyNowState extends State<BuyNow> {
                       // Navigate back to the homepage
                       Navigator.pop(context);
                     } else {
-                      // Navigate to the homepage
-                      Navigator.pushReplacementNamed(context, '/');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Payment(
+                            productPrice: widget.productPrice,
+                            quantity: widget.quantity,
+                          ),
+                        ),
+                      );
                     }
                   }
                 },

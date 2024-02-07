@@ -54,6 +54,7 @@ class _WomenCareState extends State<WomenCare> {
 
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: Text('Women Care'),
             ),
             body: SingleChildScrollView(

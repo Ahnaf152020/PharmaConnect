@@ -56,6 +56,7 @@ class _SurgicalProductState extends State<SurgicalProduct> {
 
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: Text('Surgical Products'),
             ),
             body: SingleChildScrollView(
