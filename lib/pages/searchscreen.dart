@@ -22,7 +22,23 @@ class _SearchScreenState extends State<SearchScreen> {
           padding: const EdgeInsets.only(right: 20.0, left: 20.0),
           child: Column(
             children: [
-              TextFormField(
+              // TextFormField(
+              //   onChanged: (val) {
+              //     setState(() {
+              //       inputText = val;
+              //       print(inputText);
+              //     });
+              //   },
+              // ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Enter Item Name...',
+                  prefixIcon: Icon(Icons.search),
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
                 onChanged: (val) {
                   setState(() {
                     inputText = val;

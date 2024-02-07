@@ -45,21 +45,33 @@ class MyOrderDetails extends StatelessWidget {
                     itemCount: orderDocs.docs.length,
                     itemBuilder: (context, index) {
                       final orderData =
-                      orderDocs.docs[index].data() as Map<String, dynamic>;
-                      return ListTile(
-                        leading: SizedBox(
-                          width: 100,
+                          orderDocs.docs[index].data() as Map<String, dynamic>;
+
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 100,
-                          child: Image.network(
-                            orderData['product_image'],
-                            fit: BoxFit.cover,
+                          child: ListTile(
+                            leading: SizedBox(
+                              width: 80,
+                              height: 100,
+                              child: Image.network(
+                                orderData['product_image'],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            title: Text(
+                              orderData['product_name'],
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            subtitle: Text(
+                              'Quantity: ${orderData['quantity']}',
+                            ),
+                            trailing:
+                                Text('Total \n${orderData['total_amount']}৳'),
                           ),
                         ),
-                        title: Text(orderData['product_name']),
-                        subtitle:
-                        Text('Quantity: ${orderData['quantity']}'),
-                        trailing:
-                        Text('Total: ${orderData['total_amount']}৳'),
                       );
                     },
                   );

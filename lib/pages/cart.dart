@@ -79,7 +79,7 @@ class _CartState extends State<cart> {
                               ),
                               SizedBox(height: 10,),
                               Text(
-                                "\$ ${_documentSnapshot['product_price']}",
+                                "\৳ ${_documentSnapshot['product_price']}",
                                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red.shade700),
                               ),
                             ],

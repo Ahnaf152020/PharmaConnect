@@ -47,30 +47,46 @@ class _favouriteState extends State<favourite> {
 
                   return Card(
                     elevation: 5,
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(productImageURL),
-                      ),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(_documentSnapshot['product_name']),
-                          Text(
-                            "\$ ${_documentSnapshot['product_price']}",
-                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                    child: Container(
+                      height: 120,
+                      child: ListTile(
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Container(
+                            height: 120,
+                            width: 50,
+                            child: Image.network(
+                              productImageURL,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ],
-                      ),
-                      trailing: GestureDetector(
-                        child: CircleAvatar(child: Icon(Icons.remove_circle)),
-                        onTap: () {
-                          FirebaseFirestore.instance
-                              .collection('favourite')
-                              .doc(FirebaseAuth.instance.currentUser!.email)
-                              .collection("items")
-                              .doc(_documentSnapshot.id)
-                              .delete();
-                        },
+                        ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              _documentSnapshot['product_name'],
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            SizedBox(height: 10,),
+                            Text(
+                              "\৳ ${_documentSnapshot['product_price']}",
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red.shade700),
+                            ),
+                          ],
+                        ),
+                        trailing: GestureDetector(
+                          child: CircleAvatar(child: Icon(Icons.remove_circle)),
+                          onTap: () {
+                            FirebaseFirestore.instance
+                                .collection('carts')
+                                .doc(FirebaseAuth.instance.currentUser!.email)
+                                .collection("items")
+                                .doc(_documentSnapshot.id)
+                                .delete();
+                          },
+                        ),
                       ),
                     ),
                   );
