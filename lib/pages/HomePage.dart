@@ -6,6 +6,7 @@ import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/Contains/DentalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PersonalCare.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
+import 'package:pharmaconnectbyturjo/Contains/Products.dart';
 import 'package:pharmaconnectbyturjo/Contains/WomenCare.dart';
 import 'package:pharmaconnectbyturjo/pages/SearchPage.dart';
 import 'package:pharmaconnectbyturjo/pages/searchscreen.dart';
@@ -232,7 +233,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-
+                      Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => Products()));
                     },
                     child: Column(
                       children: [

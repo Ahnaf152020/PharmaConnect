@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Model/BabyCareModel.dart';
-
 import 'package:pharmaconnectbyturjo/Model/DentalCareModel.dart';
 import 'package:pharmaconnectbyturjo/Model/PersonalCareModel.dart';
 import 'package:pharmaconnectbyturjo/Model/PopularProductModel.dart';
+import 'package:pharmaconnectbyturjo/Model/ProductsModel.dart';
 import 'package:pharmaconnectbyturjo/Model/SurgicalProductModel.dart';
 import 'package:pharmaconnectbyturjo/Model/WomenCareModel.dart';
 
@@ -19,10 +19,10 @@ class HomeScreenController extends GetxController {
   late List<SurgicalProductModel> surgicalProduct;
   late List<WomenCareModel> WomenCare;
   late List<DentalCareModel> dentalcare;
+  late List<ProductsModel> Products ;
   List<PopularProductModel> searchResults = [];
 
   bool isSearchLoading = false;
-
 
   RxBool isLoading = true.obs;
 
@@ -39,10 +39,9 @@ class HomeScreenController extends GetxController {
       getAlLBabyCare(),
       getAllSurgicalProduct(),
       getAlLWomenCare(),
-      getAllDentalCare()
+      getAllDentalCare(),
+      getAllProducts()
     ]).then((value) {
-      //print("Data");
-      //print(popularProducts[0].product_image);
       isLoading.value = false;
       update();
     });
@@ -56,6 +55,7 @@ class HomeScreenController extends GetxController {
           .toList();
     });
   }
+
   Future<void> getAllPersonalCare() async {
     await _firestore.collection('PersonalCare').get().then((value) {
       PersonalCare = value.docs
@@ -64,6 +64,7 @@ class HomeScreenController extends GetxController {
           .toList();
     });
   }
+
   Future<void> getAlLWomenCare() async {
     await _firestore.collection('WomenCare').get().then((value) {
       WomenCare = value.docs
@@ -72,6 +73,7 @@ class HomeScreenController extends GetxController {
           .toList();
     });
   }
+
   Future<void> getAllSurgicalProduct() async {
     await _firestore.collection('SurgicalProduct').get().then((value) {
       surgicalProduct = value.docs
@@ -80,6 +82,7 @@ class HomeScreenController extends GetxController {
           .toList();
     });
   }
+
   Future<void> getAlLBabyCare() async {
     await _firestore.collection('BabyCare').get().then((value) {
       babyCare = value.docs
@@ -98,24 +101,34 @@ class HomeScreenController extends GetxController {
     });
   }
 
-  Future <void> searchProducts(String query) async {
+  Future<void> getAllProducts() async {
+    await _firestore.collection('Products').get().then((value) {
+      Products = value.docs
+          .map((e) =>
+          ProductsModel.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
+
+  Future<void> searchProducts(String query) async {
     isSearchLoading = true;
     update();
     try {
-      await
-      _firestore.collection('PopularProducts')
+      await _firestore
+          .collection('PopularProducts')
           .where('product_name', isGreaterThanOrEqualTo: query)
           .get()
           .then((value) {
-        searchResults =
-            value.docs.map((e) => PopularProductModel.fromJson(e.data()))
-                .toList();
-        isSearchLoading = false;
+        searchResults = value.docs
+            .map((e) => PopularProductModel.fromJson(e.data()))
+            .toList();
+        isSearchLoading = false; // Update isSearchLoading here
         update();
       });
     } catch (e) {
-      showToast(message: 'e');
+      showToast(message: '$e'); // Display actual error message
+      isSearchLoading = false; // Update isSearchLoading in case of error too
+      update();
     }
   }
 }
-
