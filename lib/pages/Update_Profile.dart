@@ -10,6 +10,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:path/path.dart' as Path  ;
 import "package:iconsax/iconsax.dart";
 import 'package:pharmaconnectbyturjo/AdminPanel.dart';
+import 'package:pharmaconnectbyturjo/pages/Location%20User.dart';
 import 'package:pharmaconnectbyturjo/pages/LoginPage.dart';
 import 'package:pharmaconnectbyturjo/pages/edit_screen.dart';
 import 'package:pharmaconnectbyturjo/toast.dart';
@@ -160,7 +161,15 @@ class _AccountScreenState extends State<AccountScreen> {
                 bgColor: Colors.orange.shade100,
                 iconColor: Colors.orange,
                 value: "English",
-                onTap: () {},
+                onTap: () {
+                  MaterialButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => LocationUser()));
+                    },
+                    // ... rest of your button configuration
+                  );
+
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(

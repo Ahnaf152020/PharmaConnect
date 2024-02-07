@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'dart:async';
+import'package:pharmaconnectbyturjo/pages/HomePage.dart';
 
 class Anime extends StatefulWidget {
   @override
@@ -8,6 +10,17 @@ class Anime extends StatefulWidget {
 
 class _PaymentState extends State<Anime> {
   bool isOrderReady = false;
+  void initState() {
+    super.initState();
+    // Start a timer to navigate back to the home page after 5 seconds
+    Timer(Duration(seconds: 5), () {
+      // Use Navigator to pop the current screen and return to the previous screen (home page)
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
