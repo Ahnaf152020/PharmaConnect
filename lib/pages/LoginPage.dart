@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/pages/ForgotPassword.dart';
-
+import 'package:pharmaconnectbyturjo/notificationservice.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import "package:iconsax/iconsax.dart";
 import 'package:pharmaconnectbyturjo/pages/HomePage.dart';
@@ -17,12 +17,15 @@ class LoginPage extends StatefulWidget {
 
   @override
   _LoginPageState createState() => _LoginPageState();
+  //final LocalNotificationService _notificationService = LocalNotificationService();
 }
 
 class _LoginPageState extends State<LoginPage> {
   bool _isSigning = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final LocalNotificationService _notificationService = LocalNotificationService();
+
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -34,6 +37,8 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _notificationService.onNotificationClick.close();  // Close the stream
+
     super.dispose();
   }
 
@@ -49,6 +54,7 @@ class _LoginPageState extends State<LoginPage> {
       });
     });
     _isObscured = true;
+    _notificationService.initialize();
 
     super.initState();
   }
@@ -433,6 +439,11 @@ class _LoginPageState extends State<LoginPage> {
         _passwordController.text.isNotEmpty) {
       if (user != null) {
         showToast(message: "succesfully done signin");
+        _notificationService.showNotification(
+          id: 0,
+          title: 'PharmaConnect',
+          body: 'Successfully signed in!',
+        );
 
         Navigator.pushNamed(context, 'MyBottomBar');
       } else {
@@ -442,6 +453,18 @@ class _LoginPageState extends State<LoginPage> {
       showToast(message: "Please enter the field");
     }
   }
+  /*void _signOut() async {
+    await _auth.signOut();
+
+    // Show notification for logout
+    _notificationService.showNotification(
+      id: 1,
+      title: 'PharmaConnect',
+      body: 'Successfully signed out!',
+    );
+
+    Navigator.pushNamed(context, 'LoginPage');
+  }*/
 
   _signInWithGoogle() async {
     final GoogleSignIn _googleSignIn = GoogleSignIn();

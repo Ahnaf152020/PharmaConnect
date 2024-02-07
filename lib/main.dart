@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/BabyCare.dart';
+import 'package:pharmaconnectbyturjo/pages/Anime.dart';
 import 'package:pharmaconnectbyturjo/pages/NotificationHome.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/chatroom.dart';
@@ -59,6 +60,8 @@ void main() async {
       'NotificationHome':(Context)=> NotificationHome(),
       //'productdetails':(context) => ProductDetails(),
       'BabyCare':(Context)=>BabyCare(),
+      'Anime':(Context)=>Anime(),
+
     },
   ));
 }

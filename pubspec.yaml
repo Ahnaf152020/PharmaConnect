@@ -63,6 +63,8 @@ dependencies:
   flutter_screenutil: ^5.9.0
   carousel_slider: ^4.2.1
   shared_preferences: ^2.2.2
+  lottie: ^3.0.0
+  geocoding: ^2.1.1
 flutter_icons:
     android: true
     image_path: "assets/images/PharmaConnectlogo.jpg"
@@ -101,6 +103,7 @@ flutter:
     - assets/icon/
     - assets/Medicine/
     - assets/PaymentIcon/
+    - assets/Animations/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmaconnectbyturjo/pages/Anime.dart';
 
 class Payment extends StatefulWidget {
   final double productPrice;
@@ -121,7 +122,7 @@ class _PaymentState extends State<Payment> {
                               ),
                               child: Image(
                                 image:
-                                    AssetImage("assets/PaymentIcon/bkash.png"),
+                                AssetImage("assets/PaymentIcon/bkash.png"),
                                 height: 30,
                               ),
                             ),
@@ -134,21 +135,7 @@ class _PaymentState extends State<Payment> {
                               ),
                               child: Image(
                                 image:
-                                    AssetImage("assets/PaymentIcon/nagad.png"),
-                                height: 30,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image(
-                                image:
-                                    AssetImage("assets/PaymentIcon/rocket.png"),
+                                AssetImage("assets/PaymentIcon/nagad.png"),
                                 height: 30,
                                 fit: BoxFit.cover,
                               ),
@@ -162,7 +149,21 @@ class _PaymentState extends State<Payment> {
                               ),
                               child: Image(
                                 image:
-                                    AssetImage("assets/PaymentIcon/visa.png"),
+                                AssetImage("assets/PaymentIcon/rocket.png"),
+                                height: 30,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image(
+                                image:
+                                AssetImage("assets/PaymentIcon/visa.png"),
                                 height: 30,
                                 fit: BoxFit.cover,
                               ),
@@ -202,47 +203,47 @@ class _PaymentState extends State<Payment> {
                       ),
                       child: user != null
                           ? StreamBuilder(
-                              stream: FirebaseFirestore.instance
-                                  .collection('users')
-                                  .doc(user.uid)
-                                  .snapshots(),
-                              builder: (context, snapshot) {
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                      child: CircularProgressIndicator());
-                                }
+                        stream: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(user.uid)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(
+                                child: CircularProgressIndicator());
+                          }
 
-                                var userData =
-                                    snapshot.data as DocumentSnapshot;
-                                userName = userData['user name'];
+                          var userData =
+                          snapshot.data as DocumentSnapshot;
+                          userName = userData['user name'];
 
-                                return Center(
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Name: ',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Text(
-                                        '$userName',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            )
+                          return Center(
+                            child: Row(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Name: ',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  '$userName',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      )
                           : Center(child: Text('User not logged in')),
                     ),
                   ],
@@ -285,7 +286,7 @@ class _PaymentState extends State<Payment> {
                             child: Text(
                               value,
                               style:
-                                  TextStyle(fontSize: 15, color: Colors.blue),
+                              TextStyle(fontSize: 15, color: Colors.blue),
                             ),
                           );
                         }).toList(),
@@ -313,7 +314,7 @@ class _PaymentState extends State<Payment> {
                     Text(
                       "Total Payment",
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                     Text("$totalAmount৳",
                         style: TextStyle(
@@ -322,7 +323,9 @@ class _PaymentState extends State<Payment> {
                 ),
                 SizedBox(height: 30),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Anime()));
+                  },
                   height: 50,
                   elevation: 0,
                   splashColor: Colors.yellow[700],
@@ -331,12 +334,12 @@ class _PaymentState extends State<Payment> {
                   color: Colors.yellow[800],
                   child: Center(
                       child: Container(
-                    child: Text(
-                      "Pay Now",
-                      style:
+                        child: Text(
+                          "Pay Now",
+                          style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  )),
+                        ),
+                      )),
                 ),
               ]),
         ),
