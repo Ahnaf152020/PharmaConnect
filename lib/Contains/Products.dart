@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
 import 'package:pharmaconnectbyturjo/Contains/Categories.dart';
+import 'package:pharmaconnectbyturjo/Contains/allrpoductsearch.dart';
 import 'package:pharmaconnectbyturjo/Model/ProductsModel.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
 
@@ -61,7 +62,7 @@ class _ProductsState extends State<Products> {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: Text('Dental Care'),
+              title: Text('All Product'),
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -77,6 +78,8 @@ class _ProductsState extends State<Products> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
+                      onTap: () => Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => allSearchScreen())),
                     ),
                     SizedBox(height: 10,),
                     GridView.builder(

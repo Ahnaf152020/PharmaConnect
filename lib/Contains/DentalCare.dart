@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 import 'package:pharmaconnectbyturjo/Contains/PopularProduct.dart';
 import 'package:pharmaconnectbyturjo/Contains/Categories.dart';
+import 'package:pharmaconnectbyturjo/Contains/dentalsearch.dart';
 import 'package:pharmaconnectbyturjo/Model/DentalCareModel.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
 
@@ -77,6 +78,8 @@ class _DentalProductState extends State<DentalProduct> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
+                      onTap: () => Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => dentalSearchScreen())),
                     ),
                     SizedBox(height: 10,),
                     GridView.builder(

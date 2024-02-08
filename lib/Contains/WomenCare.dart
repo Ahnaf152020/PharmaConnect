@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pharmaconnectbyturjo/Contains/womansearch.dart';
 import 'package:pharmaconnectbyturjo/Model/WomenCareModel.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
@@ -71,6 +72,8 @@ class _WomenCareState extends State<WomenCare> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
+                      onTap: () => Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => womenSearchScreen())),
                     ),
                     SizedBox(height: 10,),
                     GridView.builder(
