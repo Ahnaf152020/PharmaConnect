@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pharmaconnectbyturjo/Contains/surgisearch.dart';
 import 'package:pharmaconnectbyturjo/Model/SurgicalProductModel.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
@@ -73,6 +74,8 @@ class _SurgicalProductState extends State<SurgicalProduct> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
+                      onTap: () => Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => SurgiSearchScreen())),
                     ),
                     SizedBox(height: 10,),
                     GridView.builder(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pharmaconnectbyturjo/Contains/babycaresearch.dart';
 import 'package:pharmaconnectbyturjo/Model/BabyCareModel.dart';
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
@@ -71,6 +72,8 @@ class _BabyCareState extends State<BabyCare> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
+                      onTap: () => Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => BabySearchScreen())),
                     ),
                     SizedBox(height: 10,),
                     GridView.builder(

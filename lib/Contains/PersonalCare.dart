@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:pharmaconnectbyturjo/Contains/HomeScreenController.dart';
+import 'package:pharmaconnectbyturjo/Contains/personalsearch.dart';
 import 'package:pharmaconnectbyturjo/Model/PersonalCareModel.dart';
 import 'package:pharmaconnectbyturjo/pages/productdetails.dart';
 
@@ -72,6 +73,8 @@ class _PersonalCareState extends State<PersonalCare> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
+                      onTap: () => Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => persoSearchScreen())),
                     ),
                     SizedBox(height: 10,),
                     GridView.builder(
