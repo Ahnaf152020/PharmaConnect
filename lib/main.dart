@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmaconnectbyturjo/Contains/BabyCare.dart';
 import 'package:pharmaconnectbyturjo/pages/Anime.dart';
+import 'package:pharmaconnectbyturjo/pages/Location%20User.dart';
 import 'package:pharmaconnectbyturjo/pages/NotificationHome.dart';
 import 'package:pharmaconnectbyturjo/Contains/BottomBar.dart';
 import 'package:pharmaconnectbyturjo/chatroom.dart';
@@ -61,6 +62,7 @@ void main() async {
       //'productdetails':(context) => ProductDetails(),
       'BabyCare':(Context)=>BabyCare(),
       'Anime':(Context)=>Anime(),
+      'LocationUser':(Context)=>LocationUser(),
 
     },
   ));

@@ -38,16 +38,22 @@ class _PaymentState extends State<Anime> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset('assets/Animations/Animation - 1707321626562.json', height: 450),
+          Lottie.asset('assets/Animations/Animation - 1707321626562.json', height: 350),
           SizedBox(height: 10),
           Text(
             'Your order has been placed! Thanks for Ordering.',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
               color: Colors.blue, // Set your desired text color
             ),
             textAlign: TextAlign.center, // Center align the text
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, 'LocationUser');
+            },
+            child: Text('Go to Location User Page'), // Add a child widget, e.g., Text
           ),
 
         ],
